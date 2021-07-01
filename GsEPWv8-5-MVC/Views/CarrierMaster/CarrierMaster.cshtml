@@ -1,0 +1,222 @@
+﻿
+@model GsEPWv8_5_MVC.Model.CarrierModel
+@{
+    ViewBag.Title = "CarrierMaster";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<style>
+    div#ajaxLoading {
+        display: none;
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        top: 30%;
+        left: 56%;
+        text-align: center;
+        margin-left: -50px;
+        margin-top: -100px;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .ScreenTitle {
+        padding-left: 0px;
+        font-size: 18px;
+        font-family: Verdana;
+        font-weight: bold;
+        padding-top: 13px;
+    }
+</style>
+<style>
+    fieldset {
+        margin: 8px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+<link href="~/Scripts/DateTimePicker/jquery.datetimepicker.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Scripts/ManualSheets/jquery-ui.css" rel="stylesheet" />
+<link href="~/Scripts/Style/CommonStyleSheet.css" rel="stylesheet" />
+<link href="~/Scripts/sweetalert.css" rel="stylesheet" />
+@Html.HiddenFor(model => model.tmp_cmp_id, new { @id = "g_str_tmp_cmp_id" })
+@Html.HiddenFor(model => model.tmp_cmp_id, new { @id = "cmb_v_cmp_id" })
+@Html.HiddenFor(model => model.screentitle)
+@using (Html.BeginForm("CarrierMaster", "CarrierMaster", FormMethod.Post, new { @id = "form", @class = "col-xs-12", @enctype = "multipart/form-data" }))
+{
+    <div>
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 75%;" class="ScreenTitle">
+                    Carrier Master
+                </td>
+                <td style="padding-top: 11px;width:30%;">
+                    <button type="button" id="btnClose" class="btn-Close">Close</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="ajaxLoading" style="display:none;"><img src="~/Images/ajax-loader.gif" /></div>
+    <br/>
+    <div>
+        <table>
+
+            <tr>
+                <td style="text-align: right;width:50px">
+                    <label><b class="Lblmanual">Carrier ID:</b></label>
+                </td>
+                <td style="width:150px">
+                    @Html.TextBoxFor(model => model.carrier_id, new { @class = "form-control txtlbl", @maxlength = "20", @id = "view_carrier_id", @style = "width:250px" })
+                </td>
+                <td></td>
+                <td style="text-align: right;width:60px">
+                    <label><b class="Lblmanual">Carrier Name:</b></label>
+                </td>
+                <td style="padding-left: 1%;width:80px">
+                    @Html.TextBoxFor(model => model.carrier_name, new { @class = "form-control txtlbl", @maxlength = "50", @id = "view_carrier_name", @style = "width:250px" })
+                </td>
+
+            </tr>
+        </table>
+        <br />
+        <table>
+            <tr>
+                <td style="width: 53%;"></td>
+                <td> <button type="button" id="cmdCarrierInqiry" class="btn_search" style="font-size:16px;">Search</button></td>
+                <td><button type="reset" id="cmdCarrierClear" class="btn-Clear" style="font-size:16px;">Clear</button></td>
+                <td> <button type="button" id="cmdNewCarrierEntry" class="btn_NewEntry" onclick="">New Carrier</button></td>
+            </tr>
+        </table>
+    </div>
+    <div id='CarrierAdd' class='modal' style="padding-top:73px;padding-left:150px">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:100%; left:-50px;">
+                <div id='CarrierContent' style="width: 100%; height:500px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="showtblCarrier" class="box-header">
+        <div class="box-body">
+            <table id="tblCarrier" class="table table-bordered table-striped" style="margin-left:-25px;width:410px;">
+
+                <thead class="grid_backcolor">
+                    <tr>
+                        <th class="grid_header_backcolor">Carrier Id</th>
+                        <th class="grid_header_backcolor">Carrier Scac Code</th>
+                        <th class="grid_header_backcolor">Carrier Name</th>
+                        <th class="grid_header_backcolor">Contact Name</th>
+                        <th class="grid_header_backcolor">Phone Number</th>
+                        <th class="grid_header_backcolor">Cell Number</th>
+                        <th class="grid_header_backcolor">Email</th>
+                        <th class="grid_header_backcolor">Alert Email</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+}
+<script src="~/Scripts/DateTimePicker/jquery.datetimepicker.full.min.js"></script>
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/sweetalert.js"></script>
+<script type="text/javascript">
+
+    //$('#tblCarrier').DataTable({
+    //    "paging": true,
+    //    "lengthChange": false,
+    //    "searching": false,
+    //    "ordering": false,
+    //    "info": false,
+    //    "autoWidth": true,
+    //    "scrollCollapse": true,
+    //    "sScrollY": "430px",
+    //    "sScrollX": "100%",
+    //});
+
+    $('#tblCarrier').DataTable({
+        "pagingType": "simple_numbers",
+        "paging": true,
+        "sDom": 'Rfrtlip',
+        "info": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "autoWidth": false,
+    });
+    $("#cmdNewCarrierEntry").click(function () {
+        debugger
+        var options = { "backdrop": "static", keyboard: true };
+        $("#ajaxLoading").show();
+        $.ajax({
+            type: "GET",
+            url: '/CarrierMaster/AddCarrierMaster',
+            contentType: "application/json; charset=utf-8",
+            data: { },
+            datatype: "json",
+            success: function (data) {
+                $("#ajaxLoading").hide();
+                $('#CarrierContent').html(data);
+                $('#CarrierAdd').modal(options);
+                $('#CarrierAdd').modal('show');
+            },
+            error: function () {
+                alert("Dynamic content load failed.");
+                $("#ajaxLoading").hide();
+            }
+        });
+    });
+    $("#btnClose").click(function () {
+        var p_str_cmp_id = $('#cmb_v_cmp_id').val();
+        var url = '@Url.Action("DashboardContainerArrival", "ContainerArrival")';
+        url += '?p_str_cmp_id=' + p_str_cmp_id;
+
+        window.location.href = url;
+    })
+    $(document).ready(function () {
+        $("cmdCarrierClear").each(function () {
+            $(this).val("");
+        });
+    });
+    $("#btnDashboard").click(function () {
+        var p_str_cmp_id = $('#cmb_v_cmp_id').val();
+        var url = '@Url.Action("Dashboard", "Dashboard")';
+        url += '?id=' + p_str_cmp_id;
+        window.location.href = url;
+
+    })
+    $("#cmdCarrierInqiry").click(function () {
+        debugger
+
+        var lstrCarrierId = $('#view_carrier_id').val();
+        var lstrCarrierName = $('view_carrier_name').val();
+
+            $("#ajaxLoading").show();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Content("~/CarrierMaster/fnGetCarrierDetails")',
+                data: {
+                    "pstrCarrierId": lstrCarrierId,
+                    "pstrCarrierName": lstrCarrierName
+
+                },
+                dataType: 'html',
+                success: function (e) {
+                    $("#ajaxLoading").hide();
+                    $('#showtblCarrier').html("");
+                    $('#showtblCarrier').html(e);
+                }
+            })
+    });
+</script>
+@{Html.RenderPartial("~/Views/Shared/_Popupnotification.cshtml");}

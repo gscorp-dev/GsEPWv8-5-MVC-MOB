@@ -1,0 +1,11 @@
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\bin\Release\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\bin\Release\GsEPWv8-4-MVC.Core.pdb
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\bin\Release\EPPlus.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\bin\Release\EPPlus.xml
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\obj\Release\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\obj\Release\GsEPWv8-4-MVC.Core.pdb
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\bin\Release\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\bin\Release\GsEPWv8-4-MVC.Core.pdb
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\obj\Release\GsEPWv8-5-MVC.Core.csprojResolveAssemblyReference.cache
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\obj\Release\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\obj\Release\GsEPWv8-4-MVC.Core.pdb

@@ -1,0 +1,9 @@
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\bin\Debug\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\bin\Debug\GsEPWv8-4-MVC.Core.pdb
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\obj\Debug\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Core\obj\Debug\GsEPWv8-4-MVC.Core.pdb
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\bin\Debug\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\bin\Debug\GsEPWv8-4-MVC.Core.pdb
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\obj\Debug\GsEPWv8-5-MVC.Core.csprojResolveAssemblyReference.cache
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\obj\Debug\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-5-MVC-MOB\GsEPWv8-5-MVC.Core\obj\Debug\GsEPWv8-4-MVC.Core.pdb

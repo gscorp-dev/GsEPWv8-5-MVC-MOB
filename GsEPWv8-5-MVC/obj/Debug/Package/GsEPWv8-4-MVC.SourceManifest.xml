@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC\obj\Debug\Package\PackageTmp" />
+  <setAcl path="D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

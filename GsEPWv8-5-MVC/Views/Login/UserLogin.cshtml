@@ -1,0 +1,227 @@
+﻿@model GsEPWv8_5_MVC.Model.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gs-3PLv8-5 | Log in</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/ico" href="~/Images/Gs3PL.ico" width="10" height="10" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/css/util.css">
+    <link rel="stylesheet" type="text/css" href="../Content/MobileLogin/css/main.css">
+    <!--===============================================================================================-->
+    <!-- Google Font -->
+
+    <link href="~/Scripts/sweetalert.css" rel="stylesheet" />
+    
+    <style>
+        .CDCPM-3PL-COLOR{
+          	/*text-transform: uppercase;*/
+	        background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	        -webkit-background-clip: text;
+	        -webkit-text-fill-color: transparent;
+        }
+        .sweet-alert {
+            background-color: #8cd6f7;
+            color:black;
+            width: 478px;
+            padding: 17px;
+            border-radius: 5px;
+            text-align: center;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -256px;
+            margin-top: -200px;
+            overflow: hidden;
+            display: none;
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('../Content/MobileLogin/images/bg.jpeg');">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                <form class="login100-form validate-form">
+                    <span class="login100-form-title p-b-49">
+                        <label class="CDCPM-3PL-COLOR">CDC-3PL </label> &nbsp; &nbsp;<label class="CDCPM-3PL-COLOR"> Mobile </label> &nbsp; &nbsp;<label class="CDCPM-3PL-COLOR">  PORTAL</label>
+                    </span>
+
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+                        <span class="label-input100">UserName</span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input100", @placeholder = "UserName" })
+                        <span class="focus-input100" data-symbol = "&#xf206;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <span class="label-input100">Password</span>
+                        @Html.TextBoxFor(m => m.Password, new { @class = "input100", @type = "Password", @placeholder = "Password" })
+                        <span class="focus-input100" data-symbol = "&#xf190"></span>
+                    </div>
+
+                    <div class="text-right p-t-8 p-b-31">
+                        <div class="cstmText clearfix">
+                                <a href="/ForgotPassword/ForgotPassword"> Forgot Password?</a>
+                        </div>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button style="width:100%;text-align:center;background-color:transparent;height:50px;text-transform:uppercase;font-size:16px; font-family:Poppins-Medium" onclick="return LoginAuthenticate();"id="btn_Login">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="../Content/MobileLogin/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Content/MobileLogin/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Content/MobileLogin/vendor/bootstrap/js/popper.js"></script>
+    <script src="../Content/MobileLogin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Content/MobileLogin/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Content/MobileLogin/vendor/daterangepicker/moment.min.js"></script>
+    <script src="../Content/MobileLogin/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Content/MobileLogin/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Content/MobileLogin/js/main.js"></script>
+
+</body>
+</html>
+
+<!-- /.login-box -->
+<!-- jQuery 3.1.1 -->
+<script src="../plugins/jQuery/jquery-3.1.1.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../plugins/iCheck/icheck.min.js"></script>
+<script src="~/Scripts/sweetalert.js"></script>
+<script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+</script>
+<script>
+
+    function LoginAuthenticate() {
+        debugger;
+            var Email = $("#Email").val();
+            if (Email == "") {
+                //sweetAlert("", "Please Enter the User Name", "warning")
+                sweetAlert("", "Please Enter the User Name", "")
+                $('#Email').focus();
+                $('body,html').animate({ scrollTop: 0 }, 0);
+                er = 1;
+                return false;
+            }
+            var Password = $("#Password").val();
+            if (Password == "") {
+                sweetAlert("", "Please Enter the Password", "warning");
+                $('#Password').focus();
+                $('body,html').animate({ scrollTop: 0 }, 0);
+                er = 1;
+                return false;
+            }
+            else {
+                var TeamDetailPostBackAddURL = '/login/UserLogin';
+                $.ajax({
+                    type: "POST",
+                    url: TeamDetailPostBackAddURL,
+                    data: { "Email": Email, "Password": Password },
+                    datatype: "json",
+                    success: function (data) {
+
+                        if (data == "Username or password is incorrect")
+                        {
+                            sweetAlert("", "Username or password is incorrect", "error");
+
+                        }
+                        else if (data == "LOGIN NOT ALLOWED") {
+                            swal("Please Login through http://cdclive.gensoftcorp.com");
+                        }
+                        else if (data == "Password Expired")
+                        {
+                            swal({
+                                title: "",
+                                text: "Password Expired, Please Change the Password",
+                                type: "",
+                                showCancelButton: false,
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: true
+                            },
+
+                         function () {
+                             debugger
+                             setTimeout(function () {
+                                 debugger
+                                 var url = '@Url.Action("UserProfile", "UserProfile")';
+                                 window.location.href = url;
+                             });
+                         });
+                           
+                        }
+                        else
+                        {
+                            window.location.href = '@Url.Action("MobileDashboard", "DashBoard")';
+                        }
+
+                    },
+                });
+
+            }
+
+        }
+</script>
+@{Html.RenderPartial("~/Views/Shared/_Popupnotification.cshtml");}
+<script>
+    $(document).ready(function()               
+    {
+        $(document).bind('keypress', function(e) {
+            if(e.keyCode==13){
+                $('#btn_Login').trigger('click');
+            }
+        });
+    })
+</script>
+

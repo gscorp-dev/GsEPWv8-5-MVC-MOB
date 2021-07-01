@@ -1,0 +1,662 @@
+﻿@media screen and (max-width:600px) {
+
+    .ItemMoveFooter {
+        font-size: 10px !important;
+        background-color: white;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .TotalRecords {
+        text-align: right;
+        margin-top: 5px !important;
+        font-size: 10px !important;
+        color: #116b42;
+        font-weight: bold;
+    }
+
+    .totalCount {
+        text-align: left;
+        margin-top: 5px !important;
+        font-size: 10px !important;
+        color: darkblue;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+        text-align: left;
+    }
+
+    .ScreenTitle {
+        font-size: 12px !important;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .Dashboard {
+        font-size: 12px;
+        text-decoration: underline;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .btn-Close {
+        background-color: #ff6767;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px;
+        font-size: 12px !important;
+        font-family: bold;
+        color: white;
+    }
+
+        .btn-Close:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+       
+
+    .btn-Save {
+        background-color: #00c0ef !important;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 5px !important;
+    }
+
+        .btn-Save:hover {
+            color: #fff !important;
+            background: #fff !important;
+            background-color: rgb(255, 255, 255) !important;
+            background-color: rgb(17, 88, 233) !important;
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000 !important;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8 !important;
+            box-shadow: 0px 0px 15px 0px #0054ff !important;
+        }
+
+    .btn-Search {
+        background-color: #0094ff !important;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 2px;
+    }
+
+        .btn-Search:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+  .btn_NewEntry {
+        background-color: #0094ff !important;
+        height: 30px !important;
+        width: 100px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 2px;
+    }
+
+        .btn_NewEntry:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+    .btnClear {
+        background-color: #ffac00 !important;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 2px;
+    }
+
+        .btnClear:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+    .Item_Move_tblheader {
+        text-align: left;
+        font-size: 12px;
+        font-family: bold;
+    }
+
+    .TableTextBox {
+        width: 40px !important;
+        height: 15px !important;
+        margin: 0;
+        padding: 0;
+        background-color: lightyellow;
+        text-align: left;
+        font-size: 10px !important;
+        margin-left: -5px !important;
+    }
+
+   .TableTextBoxStyle {
+        width: 80px !important;
+        height: 15px !important;
+        margin: 0;
+        padding: 0;
+        background-color: lightyellow;
+        text-align: left;
+        font-size: 10px !important;
+    }
+
+    .TableTextBoxCmpID{
+    width: 200px !important;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    background-color: lightyellow;
+    text-align: left !important;
+    font-size: 10px !important;
+    margin-left: -10px !important;
+    }
+
+    .LblForTextbox {
+    color: #0d8cb5;
+    font-family: verdana;
+    text-align: right;
+    font-weight: bold;
+    width: 50px !important;
+    height: 25px;
+    font-size: 10px !important;
+}
+}
+
+@media screen and (max-width:360px) {
+
+    .ItemMoveFooter {
+        font-size: 10px !important;
+        background-color: white;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .TotalRecords {
+        text-align: right;
+        margin-top: 5px !important;
+        font-size: 10px !important;
+        color: #116b42;
+        font-weight: bold;
+    }
+
+    .totalCount {
+        text-align: left;
+        margin-top: 5px !important;
+        font-size: 10px !important;
+        color: darkblue;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+        text-align: left;
+    }
+
+    .ScreenTitle {
+        font-size: 12px !important;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .Dashboard {
+        font-size: 12px;
+        text-decoration: underline;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .btn-Close {
+        background-color: #ff6767;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px;
+        font-size: 12px !important;
+        font-family: bold;
+        color: white;
+    }
+
+        .btn-Close:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+    .btn-Save {
+        background-color: #00c0ef !important;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 5px !important;
+    }
+
+        .btn-Save:hover {
+            color: #fff !important;
+            background: #fff !important;
+            background-color: rgb(255, 255, 255) !important;
+            background-color: rgb(17, 88, 233) !important;
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000 !important;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8 !important;
+            box-shadow: 0px 0px 15px 0px #0054ff !important;
+        }
+
+    .btn-Search {
+        background-color: #0094ff !important;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 2px;
+    }
+
+        .btn-Search:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+  .btn_NewEntry {
+        background-color: #0094ff !important;
+        height: 30px !important;
+        width: 100px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 2px;
+    }
+
+        .btn-Search:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+
+    .btnClear {
+        background-color: #ffac00 !important;
+        height: 30px !important;
+        width: 50px !important;
+        border-radius: 7px !important;
+        font-size: 12px !important;
+        font-family: bold !important;
+        color: white !important;
+        padding-left: 1% !important;
+        margin-top: 2px;
+    }
+
+        .btnClear:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+    .Item_Move_tblheader {
+        text-align: left;
+        font-size: 9px !important;
+        font-family: bold;
+    }
+
+    .TableTextBox {
+        width: 30px !important;
+        height: 15px !important;
+        margin: 0;
+        padding: 0;
+        background-color: lightyellow;
+        text-align: left;
+        font-size: 10px !important;
+    }
+
+   .TableTextBoxStyle {
+        width: 60px !important;
+        height: 15px !important;
+        margin: 0;
+        padding: 0;
+        background-color: lightyellow;
+        text-align: left;
+        font-size: 10px !important;
+    }
+
+    .TableTextBoxCmpID{
+    width: 150px !important;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    background-color: lightyellow;
+    text-align: left;
+    font-size: 10px !important;
+    }
+
+    .LblForTextbox {
+    color: #0d8cb5;
+    font-family: verdana;
+    text-align: right;
+    font-weight: bold;
+    width: 40px;
+    height: 25px;
+    font-size: 10px !important;
+}
+}
+.Item_Move_tblheader {
+    text-align: left;
+    font-size: 16px;
+    font-family: bold;
+}
+
+.Dashboard {
+    font-size: 15px;
+    text-decoration: underline;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ScreenTitle {
+    font-size: 16px;
+    font-family: Verdana;
+    font-weight: bold;
+}
+
+.Togglenavigation {
+    background-color: aliceblue;
+    color: #e06d27;
+    font-size: 24px;
+}
+
+.WelcomeText {
+    color: #4343bf;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Verdana;
+}
+
+.CompanyLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10vw;
+    height: 5vw;
+    text-align: center;
+    position: relative;
+}
+
+.LogoutText {
+    font-size: 15px;
+    color: blue;
+    text-align: right;
+    cursor: auto;
+    color: #4343bf;
+    position: relative;
+    font-family: Verdana;
+}
+
+    .LogoutText:hover {
+        cursor: pointer;
+    }
+
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+    background-color: #134861;
+}
+
+.ItemMoveFooter {
+    background-color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.LblForTextbox {
+    color: #0d8cb5;
+    font-family: verdana;
+    font-weight: bold;
+    text-align: right !important;
+    width: 100px;
+    height: 25px;
+    font-size: 12px;
+}
+
+.ButtonBlock {
+    display: block;
+    position: center;
+}
+
+.TotalRecords {
+    text-align: right;
+    margin-top: 5px !important;
+    font-size: 18px !important;
+    color: #116b42;
+    font-weight: bold;
+}
+
+.totalCount {
+    text-align: left;
+    margin-top: 5px !important;
+    font-size: 18px !important;
+    color: darkblue;
+    font-weight: bold;
+}
+
+.ItemMoveSave {
+    background-color: #00c0ef;
+}
+
+.TableTextBox {
+    width: 100%;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    background-color: lightyellow;
+    text-align: left;
+}
+.TableTextBoxStyle {
+    width: 100%;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    background-color: lightyellow;
+    text-align: left;
+}
+
+
+.TableTextBoxCmpID{
+    width: 100%;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    background-color: lightyellow;
+    text-align: left;
+}
+
+.BottomMargin {
+    margin-bottom: 1%;
+}
+
+.grid_header_backcolor {
+    font-size: 12px;
+    border: 1px solid #c3c3c3;
+    color: #21211f;
+    font-family: Verdana;
+    text-align: center;
+}
+
+.grid_backcolor {
+    background-color: #A8AEBD;
+}
+
+.btn-Close {
+    background-color: #ff6767;
+    height: 30px;
+    width: 70px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-family: bold;
+    color: white;
+}
+
+    .btn-Close:hover {
+        color: #fff;
+        background: #fff;
+        background-color: rgb(255, 255, 255);
+        background-color: rgb(17, 88, 233);
+        -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+        -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+        box-shadow: 0px 0px 15px 0px #0054ff;
+    }
+
+.btn-Save {
+    background-color: #00c0ef;
+    height: 30px;
+    width: 70px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-family: bold;
+    color: white;
+    padding-left: 1%;
+    margin-top: 2px;
+    font-family: bold;
+}
+
+    .btn-Save:hover {
+        color: #fff !important;
+        background: #fff !important;
+        background-color: rgb(255, 255, 255) !important;
+        background-color: rgb(17, 88, 233) !important;
+        -moz-box-shadow: 0px 0px 15px 0px #ff0000 !important;
+        -webkit-box-shadow: 0px 0px 15px 0px #0fcff8 !important;
+        box-shadow: 0px 0px 15px 0px #0054ff !important;
+    }
+
+.btn-Search {
+    background-color: #0094ff;
+    height: 30px;
+    width: 70px;
+    border-radius: 7px;
+    font-size: 16px;
+    font-family: bold;
+    color: white;
+    margin-top: 2px;
+    text-align:center !important;
+}
+
+    .btn-Search:hover {
+        color: #fff;
+        background: #fff;
+        background-color: rgb(255, 255, 255);
+        background-color: rgb(17, 88, 233);
+        -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+        -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+        box-shadow: 0px 0px 15px 0px #0054ff;
+    }
+    .btn_NewEntry {
+        background-color: #0094ff;
+        height: 30px;
+        width: 100px ;
+        border-radius: 7px ;
+        font-size: 12px ;
+        font-family: bold t;
+        color: white ;
+        padding-left: 1% ;
+        margin-top: 2px;
+    }
+
+        .btn-Search:hover {
+            color: #fff;
+            background: #fff;
+            background-color: rgb(255, 255, 255);
+            background-color: rgb(17, 88, 233);
+            -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+            -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+            box-shadow: 0px 0px 15px 0px #0054ff;
+        }
+
+.btnClear {
+    background-color: #ffac00;
+    height: 30px;
+    width: 70px ;
+    border-radius: 7px;
+    font-size: 16px;
+    font-family: bold;
+    color: white;
+    margin-top: 2px;
+    text-align:center;
+}
+
+    .btnClear:hover {
+        color: #fff;
+        background: #fff;
+        background-color: rgb(255, 255, 255);
+        background-color: rgb(17, 88, 233);
+        -moz-box-shadow: 0px 0px 15px 0px #ff0000;
+        -webkit-box-shadow: 0px 0px 15px 0px #0fcff8;
+        box-shadow: 0px 0px 15px 0px #0054ff;
+    }

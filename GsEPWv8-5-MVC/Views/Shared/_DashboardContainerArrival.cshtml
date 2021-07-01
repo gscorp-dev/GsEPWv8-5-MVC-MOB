@@ -1,0 +1,947 @@
+﻿@model GsEPWv8_5_MVC.Model.ContainerArrivalModel
+
+@{
+    var g_int_total_records = Model.ListGetContainerArrivalDetails.Count();
+}
+
+<style>
+    .hdrgridItemMove {
+        height: 49px;
+        background: #d2d6de;
+        padding-top: 10px;
+    }
+</style>
+<link href="~/Scripts/Style/CommonStyleSheet.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+<link href="~/Scripts/DateTimePicker/jquery.datetimepicker.css" rel="stylesheet" />
+<link href="~/Scripts/ManualSheets/jquery-ui.css" rel="stylesheet" />
+<link href="~/Scripts/sweetalert.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/ItemMoveCSS.css">
+
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/DateTimePicker/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/AutoComplete/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="~/Scripts/sweetalert.js"></script>
+<script src="~/Scripts/DateTimePicker/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/sweetalert.js"></script>
+<link href="~/Scripts/sweetalert.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<input type="hidden" id="one" />
+<input type="hidden" value="@ViewBag.emailList" id="l_str_emailList" />
+<div style="display:none">
+    @Html.TextBoxFor(model => model.whs_id, new { @id = "WhsID" })
+</div>
+<center>
+    <div id="hdrgridItemMove" class="container-fluid">
+        <div class="row" style="background-color:lightgrey;">
+            <div style="width:100%;" class="container-fluid">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-2 col-sm-2 col-xs-2 TotalRecords" style="text-align:right">
+                        <label style="text-align:left; font-size:14px; margin-top:5px">
+                            Total Records:
+                        </label>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2 totalCount" style="text-align:left">
+                        <label style="text-align:left; font-size:14px; margin-top:5px">
+                            @g_int_total_records
+                        </label>
+                    </div>
+                    @*@if (Model.ListGetContainerArrivalDetails.Count >0)
+                        {
+                        <div class="col-md-8 col-sm-8 col-xs-8" style="text-align:left">
+                            <button type="button" id="btnItemSave" class="btn-Save">Save</button>
+                            <button type="button" id="btnItemDelete" class="btn-Close">Delete</button>
+                        </div>
+                        }*@
+                    <div id="ajaxLoading1" style="display:none;"><img src="~/Images/ajax-loader.gif" /></div>
+                </div>
+            </div>
+
+        </div>
+
+        <table id="GridItemMove" class="table table-bordered table-striped" style="border:1px solid #121213;">
+            <thead class="tbl-header grid_backcolor">
+                <tr>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:8%;">
+                        IBDOC # & DATE
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:1%;">
+                        E/D/S/C
+                    </th>
+
+                    @*<th class="grid_header_backcolor Item_Move_tblheader" style="width:18%;">*@
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:13%;">
+                        ARRIVAL DT
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:13%;">
+                        Carrier
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:10%">
+                        TYPE
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:20%">
+                        Emails
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:20%">
+                        Note
+                    </th>
+                    @*<th class="grid_header_backcolor Item_Move_tblheader" style="width:3%;">
+                            Save
+                        </th>
+                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:3%;">
+                            Delete
+                        </th>*@
+
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                </tr>
+            </thead>
+            <tbody class="tbl-content" style="background-color:rgba(0, 0, 0, 0.12);">
+                @for (int i = 0; i < Model.ListGetContainerArrivalDetails.Count; i++)
+                {
+                    int line = i + 1;
+                    int ppk = (Model.ListGetContainerArrivalDetails[i].pkg_qty);
+                    <tr id="GridID_@i" style="background-color:white;">
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:12%">
+                            <table>
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(model => @Model.ListGetContainerArrivalDetails[i].ib_doc_id, new { @class = "mvctn TableTextBox", @id = "ib_doc_id", @disabled = "true", @style = "background-color:lightyellow;text-align :center;", @data = @line })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.TextBox("ib_doc_dt", (string)ViewBag.ib_doc_dt, new { @class = "mvctn TableTextBox", @id = "ib_doc_dt", @disabled = "true", @style = "background-color:lightyellow;text-align :center;", @data = @line })
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td id="Savebt" style="text-align:center;">
+                            @if (Model.ListGetContainerArrivalDetails.Count > 0)
+                            {
+                                <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline;color: blue;" class="ArriveEntryEditDetail"><span class="glyphicon glyphicon-pencil" style="font-size: 20px;"></span><b></b></a>
+                                <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline; color: red;" class="ArriveEntryDeleteDetail"><span class="glyphicon glyphicon-trash" style="font-size: 18px;"></span><b></b></a>
+                                <br />
+                                <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline;color: blue;" class="ArriveEntrySaveDetail"><span class="glyphicon glyphicon-floppy-disk" style="font-size: 20px;"></span><b></b></a>
+                                <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline;color: red;" class="ArriveEntryCancelDetail"><span class="glyphicon glyphicon-remove" style="font-size: 23px;"></span><b></b></a>
+                            }
+                        </td>
+
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :center; width:10%">
+                            <table>
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.ListGetContainerArrivalDetails[i].arrival_dt, new { @class = "form-control txtlbl", @id = "adj_date", @disabled = "true", placeholder = "MM/DD/YYYY", @maxlength = "50" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.ListGetContainerArrivalDetails[i].search_text, new { @class = "form-control TableTextBox", @disabled = "true", @maxlength = "50", @style = "background-color:lightyellow;text-align :center;font-size:116%;color:blue;", @data = @line })
+                                        @*@Html.TextBoxFor(model => model.ListGetContainerArrivalDetails[i].search_text, new { @class = "form-control", @disabled = "true", @maxlength = "50", @style = "background-color:lightyellow;text-align :center;font-size:160%;color:blue;", @data = @line })*@
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:20%">
+                            @Html.DropDownListFor(model => model.ListGetContainerArrivalDetails[i].carrier_name, new SelectList(Model.ListGetCarrierDetails, "carrier_id", "carrier_name"), new { @class = "form-control TableTextBoxCmpID", @style = "width:200px" })
+                            @*@Html.DropDownListFor(model => model.ListGetContainerArrivalDetails[i].carrier_id, new SelectList(Model.ListGetCarrierDetails, "carrier_id", "carrier_name"), new { @class = "form-control TableTextBoxCmpID", @style = "width:200px" })*@
+                            @*@Html.DropDownListFor(model => model.ListGetContainerArrivalDetails[i].carrier_id,new SelectList(Model.ListGetCarrierDetails, "carrier_id", "carrier_name"), new { @class = "form-control TableTextBoxCmpID", @style = "width:200px" })*@
+
+                            @*@if (Model.ListGetContainerArrivalDetails[i].carrier_name == null)
+                            {
+                                @Html.DropDownListFor(model => model.ListGetContainerArrivalDetails[i].carrier_name, new SelectList(Model.ListGetCarrierDetails, "carrier_id", "carrier_name"), new { @class = "form-control TableTextBoxCmpID", @style = "width:200px" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(model => model.ListGetContainerArrivalDetails[i].carrier_name, new { @id = "carrier_name", @disabled = "true", @class = "form-control TableTextBoxCmpID", @style = "width:200px" })
+                                @Html.TextBoxFor(model => model.ListGetContainerArrivalDetails[i].carrier_id, new { @id = "carrier_id", @disabled = "true", @class = "form-control TableTextBoxCmpID", @style = "width:200px" })
+                            }*@
+                            <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline;color: blue;" class="AddNewCarrierMethod"><span class="glyphicon glyphicon-plus" style="font-size: 20px;"></span><b></b></a>
+                            <button type="reset" id="btnAddNewCarrier" class="btn-Clear" style="background-color:#5ae77e;width: 130px;font-size: 13px;visibility:hidden;">New Carrier</button>
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold;text-align :center; width:8%">
+
+                            <select id="id_format" class="btn-Format" type="button" style="margin-left:6px;width:50px; text-align:right " data-toggle="dropdown">
+                                <option>20FT</option>
+                                <option>40FT</option>
+                                <option>45HC</option>
+                                <option>AIR</option>
+                                <option>Other</option>
+                            </select>
+                            @*@if (Model.ListGetContainerArrivalDetails[i].carrier_name == null)
+                            {
+                                <select id="id_format" class="btn-Format" type="button" style="margin-left:6px;width:50px; text-align:right " data-toggle="dropdown">
+                                    <option>20FT</option>
+                                    <option>40FT</option>
+                                    <option>45HC</option>
+                                    <option>AIR</option>
+                                    <option>Other</option>
+                                </select>
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(model => model.ListGetContainerArrivalDetails[i].type, new { @class = "mvctn TableTextBox", @id = "type", @style = "background-color:lightyellow;text-align :center;", @data = @line })
+                            }*@
+                        </td>
+                        @*<td id="chkboxAll" id1="@line" id2="@ppk" style="text-align:center;">*@
+                        <td id="chkEmail" id1="@line" id2="@ppk" style="text-align:center;">
+                            @*<a href="javascript:void(0);" style="font-size:15px;  color: red;" class="InboundInqDelDetail" data-id="@Model.ListGetContainerArrivalDetails[i].cmp_id" data-id1="@Model.ListGetContainerArrivalDetails[i].ib_doc_id"><span class="glyphicon glyphicon-envelope" style="font-size: 18px;"></span><b>&nbsp;&nbsp;&nbsp;Show Emails</b></a>*@
+                            @for (int j = 0; j < Model.ListEamilDetail.Count; j++)
+                            {
+                                @Model.ListEamilDetail[j].email<br />
+                            }
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:10%">
+                            @Html.TextAreaFor(model => model.ListGetContainerArrivalDetails[i].Note, new { @id = "Note", @disabled = "true", @class = "form-control txtlbl", @style = "width:200px" })
+                        </td>
+
+                        @*<td id="Savebt" style="text-align:center;">
+                                @if (Model.ListGetContainerArrivalDetails.Count > 0)
+                                {
+                                    <button type="button" id="btnItemSave" class="btn-Save">Save</button>
+                                }
+                            </td>
+                            <td id="Savebt" style="text-align:center;">
+                                @if (Model.ListGetContainerArrivalDetails.Count > 0)
+                                {
+                                    <button type="button" id="btnItemDelete" class="btn-Close">Delete</button>
+                                }
+                            </td>*@
+
+                        <!--Display None - Region-->
+                        <td style="font-size:12px; color:black; font-weight:bold;text-align :left;display:none">
+                            @Html.TextBoxFor(model => Model.ListGetContainerArrivalDetails[i].move_qty, new { @class = "mvqty TableTextBox", @id = "mvqty_" + i, @disabled = "true", @style = "background-color:lightyellow;", @data = @line })
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;  display:none;">
+                            @Model.ListGetContainerArrivalDetails[i].tot_qty
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold; display:none;">
+                            @Model.ListGetContainerArrivalDetails[i].ib_doc_id
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                            @Model.ListGetContainerArrivalDetails[i].rcvd_dt
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                            @Model.ListGetContainerArrivalDetails[i].cont_id
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                            @Model.ListGetContainerArrivalDetails[i].lot_id
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold; text-align :left; display:none;">
+                            @Model.ListGetContainerArrivalDetails[i].palet_id
+                        </td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].tot_ctns, new { @class = "tot_ctns", @id = "tot_ctns_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].tot_ctns</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].pkg_qty, new { @class = "pkg_qty", @id = "pkg_qty_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].pkg_qty</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].tot_qty, new { @class = "tot_qty", @id = "tot_qty_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].tot_qty</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].cont_id, new { @class = "cont_id", @id = "cont_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].cont_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].ib_doc_id, new { @class = "ib_doc_id", @id = "ib_doc_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].ib_doc_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].lot_id, new { @class = "lot_id", @id = "lot_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].lot_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].palet_id, new { @class = "palet_id", @id = "palet_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].palet_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].loc_id, new { @class = "loc_id", @id = "loc_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetContainerArrivalDetails[i].loc_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].rcvd_dt, new { @class = "rcvd_dt", @id = "rcvd_dt_" + i, @style = "width:1px;text-align:left;" })@Model.ListGetContainerArrivalDetails[i].rcvd_dt</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].po_num, new { @class = "po_num", @id = "po_num_" + i, @style = "width:1px;text-align:left;" })@Model.ListGetContainerArrivalDetails[i].po_num</td>
+                        @*<td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetContainerArrivalDetails[i].carrier_id, new { @class = "carrier_id", @id = "carrier_id", @style = "width:1px;text-align:left;" })@Model.ListGetContainerArrivalDetails[i].carrier_id/td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.Hidden("hdn_total_records", g_int_total_records)
+    </div>
+
+    <div id='CompanyAdd' class='modal'>
+        <div class="modal-dialog">
+            <center>
+                <div class="modal-content" style="width: 176%;left: -290px; ">
+                    <div id='CompanyContentAdd' style="width: 1050px;height:620px;"></div>
+
+                </div>
+            </center>
+        </div>
+    </div>
+    @*<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*@
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div id='CarrierAdd' class='modal' style="padding-top:73px;padding-left:150px">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:100%; left:0px;">
+                <div id='CarrierContent' style="width: 100%; height:500px;"></div>
+            </div>
+        </div>
+    </div>
+</center>
+
+
+
+
+<script type="text/javascript">
+    $('document').ready(function () {
+        $("#btnAddNewCarrier").click(function () {
+            debugger
+            var options = { "backdrop": "static", keyboard: true };
+            $("#ajaxLoading").show();
+            $.ajax({
+                type: "GET",
+                url: '/ContainerArrival/AddCarrierMaster',
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                datatype: "json",
+                success: function (data) {
+                    $("#ajaxLoading").hide();
+                    $('#CarrierContent').html(data);
+                    $('#CarrierAdd').modal(options);
+                    $('#CarrierAdd').modal('show');
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                    $("#ajaxLoading").hide();
+                }
+            });
+        });
+
+
+        $(".to_loc").autocomplete({
+            matchContains: true,
+            minChars: 1,
+            mustMatch: true,
+            source: "/StockChange/ItemXGetLocDtl?cmp_id=" + $('#cmp_id').val() + "&",
+            select: function (event, ui) {
+                debugger
+                $("#to_loc").val(ui.item.loc_id);
+                closeOnSelect: true
+            }
+        });
+        $(".ui-autocomplete").css("z-index", "2147483647");
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // executes when HTML-Document is loaded and DOM is ready
+        //alert("document is ready");
+        $(".ArriveEntryEditDetail").show(); 
+        $(".ArriveEntrySaveDetail").hide();
+        $(".ArriveEntryDeleteDetail").show();
+        $(".ArriveEntryCancelDetail").hide();
+
+    });
+    $(window).on("load resize ", function () {
+        var scrollWidth = $('#tbl-content').width() - $('#tbl-content table').width();
+        $('#tbl-header').css({ 'padding-right': scrollWidth });
+    }).resize();
+
+    var p_str_check_value = false;
+    $(".numericOnly").bind('keypress', function (e) {
+        if (e.keyCode == '9' || e.keyCode == '16') {
+            return;
+        }
+        var code;
+        if (e.keyCode) code = e.keyCode;
+        else if (e.which) code = e.which;
+        if (e.which == 46)
+            return false;
+        if (code == 8 || code == 46)
+            return true;
+        if (code < 48 || code > 57)
+            return false;
+    });
+    $('#GridItemMove').DataTable({
+        "pagingType": "simple_numbers",
+        "paging": true,
+        "sDom": 'Rfrtlip',
+        "info": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "autoWidth": false,
+    });
+
+    //$(document).ready(function () {
+    //    $('#exampleModal').modal('show');
+    //});
+
+    $(".ArriveEntryEditDetail").click(function () {
+        //alert("here Edit");
+        $(".ArriveEntryEditDetail").hide();
+        $(".ArriveEntryDeleteDetail").hide();
+        $(".ArriveEntrySaveDetail").show();
+        $(".ArriveEntryCancelDetail").show();
+        //$("#adj_date").prop('disabled', true);
+        $("#adj_date").prop('disabled', false);
+        $("#Note").prop('disabled', false);
+
+    });
+
+    $(".ArriveEntryDeleteDetail").click(function () {
+        // alert("here Delete");
+        debugger
+        $("#ajaxLoading1").show();
+        var p_str_cmp_id = $('#cmp_id').val();
+        if (p_str_cmp_id == "") {
+            swal("", "Please Select The Company.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+
+        var p_str_adj_dt = $('#adj_date').val();
+        if (p_str_adj_dt == "") {
+            swal("", "Please Select The Arrival Date.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+
+        var p_str_carrier_id = $('#carrier_name').val();
+        if (p_str_carrier_id == "") {
+            swal("", "Please Select The Carrier.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+
+        var p_str_cmp_id = $('#cmp_id').val();
+        var p_str_doc_id = $('#ib_doc_id').val();
+        var p_str_adj_dt = $('#adj_date').val();
+        var p_str_carrier_id = $('#carrier_name').val();
+        if (typeof p_str_carrier_id === "undefined") {
+            p_str_carrier_id = $('#carrier_id').val();
+        }
+        var p_str_whs_id = $("#WhsID").val();
+        var p_str_type = $('#type').val();
+        var p_str_cont_id = $('#cont_id').val();
+        var p_str_Notes = $("#Note").val();
+        var p_str_event = "DELETE";
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Content("~/ContainerArrival/SaveContainerArrival")',
+            data: {
+                "p_str_cmp_id": p_str_cmp_id,
+                "p_str_doc_id": p_str_doc_id,
+                "p_str_adj_dt": p_str_adj_dt,
+                "p_str_carrier_id": p_str_carrier_id,
+                "p_str_whs_id": p_str_whs_id,
+                "p_str_type": p_str_type,
+                "p_str_cont_id": p_str_cont_id,
+                "p_str_event": p_str_event,
+            },
+            contentType: "application/json; charset=utf-8",
+            //dataType: "json",
+            datatype: "html",
+            success: function (e) {
+                if (e == 1) {
+                    $("#ajaxLoading1").hide();
+                    swal({
+                        title: "",
+                        text: "Succesfully Deleted",
+                        type: "",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    },
+
+                    function () {
+                        $("#ajaxLoading1").hide();
+                    });
+                    $(".ArriveEntryEditDetail").show();
+                    $(".ArriveEntryDeleteDetail").show();
+                    $(".ArriveEntrySaveDetail").hide();
+                    $(".ArriveEntryCancelDetail").hide();
+                    $("#adj_date").prop('disabled', true);
+                    $("#Note").prop('disabled', true);
+                }
+            }
+        });
+        clear();
+        $("#ajaxLoading1").hide();
+    });
+
+    $(".AddNewCarrierMethod").click(function () {
+        debugger
+        debugger
+        var options = { "backdrop": "static", keyboard: true };
+        $("#ajaxLoading").show();
+        $.ajax({
+            type: "GET",
+            url: '/ContainerArrival/AddCarrierMaster',
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            datatype: "json",
+            success: function (data) {
+                $("#ajaxLoading").hide();
+                $('#CarrierContent').html(data);
+                $('#CarrierAdd').modal(options);
+                $('#CarrierAdd').modal('show');
+            },
+            error: function () {
+                alert("Dynamic content load failed.");
+                $("#ajaxLoading").hide();
+            }
+        });
+    });
+
+    $(".ArriveEntrySaveDetail").click(function () {
+        debugger
+        $("#ajaxLoading1").show();
+        var p_str_cmp_id = $('#cmp_id').val();
+        if (p_str_cmp_id == "") {
+            swal("", "Please Select The Company.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            $("#ajaxLoading1").hide();
+            return false;
+        }
+
+        var p_str_adj_dt = $('#adj_date').val();
+        if (p_str_adj_dt == "") {
+            swal("", "Please Select The Arrival Date.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            $("#ajaxLoading1").hide();
+            return false;
+        }
+
+        var p_str_carrier_id = $('#carrier_name').val();
+        if (p_str_carrier_id == "") {
+            swal("", "Please Select The Carrier.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            $("#ajaxLoading").hide();
+            return false;
+        }
+        
+        var p_str_cmp_id = $('#cmp_id').val();
+        var p_str_doc_id = $('#ib_doc_id').val();
+        var p_str_adj_dt = $('#adj_date').val();
+        var p_str_carrier_id = $('#ListGetContainerArrivalDetails_0__carrier_name').val();
+        if (typeof p_str_carrier_id === "undefined") {
+            p_str_carrier_id = $('#carrier_id').val();
+        }
+        var p_str_whs_id = $("#WhsID").val();
+        var getFormat = $('#id_format').find(":selected").text();
+        var p_str_type = getFormat;
+        var p_str_cont_id = $('#cont_id').val();
+        var p_str_event = "Add";
+        var p_str_Notes = $("#Note").val();
+        var p_str_emailList = $('#l_str_emailList').val();
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Content("~/ContainerArrival/SaveContainerArrival")',
+            data: {
+                "p_str_cmp_id": p_str_cmp_id,
+                "p_str_doc_id": p_str_doc_id,
+                "p_str_adj_dt": p_str_adj_dt,
+                "p_str_carrier_id": p_str_carrier_id,
+                "p_str_whs_id": p_str_whs_id,
+                "p_str_type": p_str_type,
+                "p_str_cont_id": p_str_cont_id,
+                "p_str_event": p_str_event,
+                "p_str_Notes": p_str_Notes,
+                "p_str_emailList": p_str_emailList
+            },
+            dataType: 'html',
+            success: function (e) {
+                debugger;
+                if (e == 1) {
+                    $("#ajaxLoading1").hide();
+                    //sweetAlert("", "UserId" + p_str_user_id + "Alreadry Exist.", "");
+                    swal({
+                        title: "",
+                        text: "Saved Succesfully",
+                        type: "",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    },
+                    function () {
+                        $("#ajaxLoading1").hide();
+                    });
+                    clear();
+                    $(".ArriveEntryEditDetail").show();
+                    $(".ArriveEntryDeleteDetail").show();
+                    $(".ArriveEntrySaveDetail").hide();
+                    $(".ArriveEntryCancelDetail").hide();
+                    $("#adj_date").prop('disabled', true);
+                    $("#Note").prop('disabled', true);
+                }
+            },
+
+        });
+        $("#ajaxLoading1").hide();
+    });
+
+    $(".ArriveEntryCancelDetail").click(function () {
+        //alert("here Cancel");
+        debugger
+        var cmp_id = $("#cmp_id").val();
+
+        if (cmp_id == "") {
+            sweetAlert("", "Please select the Company Id", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+        else {
+            var p_str_cmpid = $('#cmp_id').val();
+            var p_str_whsId = $('#whs_id').val();
+            var p_str_contId = $('#cont_id').val();
+
+            $("#ajaxLoading").show();
+
+            $.ajax({
+                type: "GET",
+                url: "/ContainerArrival/DashboardConatinerArrivalGrid",
+                contentType: "application/json; charset=utf-8",
+                data: {
+                    "p_str_cmpid": p_str_cmpid, "p_str_whsId": p_str_whsId,
+                    "p_str_contId": p_str_contId, "p_str_event": "Arrive"
+                },
+
+                dataType: 'html',
+                success: function (e) {
+                    debugger
+                    $("#ajaxLoading").hide();
+                    $('#Itemgrid').html("");
+                    $('#Itemgrid').html(e);
+                },
+                error: function () {
+                    $("#ajaxLoading").hide();
+                    swal("Select filter data !");
+                }
+            });
+        }
+
+        $(".ArriveEntryEditDetail").show();
+        $(".ArriveEntryDeleteDetail").show();
+        $(".ArriveEntrySaveDetail").hide();
+        $(".ArriveEntryCancelDetail").hide();
+        $("#adj_date").prop('disabled', true);
+        //$('#Note').val('');
+        //$("#Note").prop('disabled', true);
+    });
+
+
+    $("#cmdNewCarrierEntry").click(function () {
+        debugger
+        //var options = { "backdrop": "static", keyboard: true };
+        $("#ajaxLoading1").show();
+        $.ajax({
+            type: "GET",
+            url: '/ContainerArrival/AddCarrierMaster',
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            datatype: "json",
+            success: function (data) {
+                $("#ajaxLoading1").hide();
+                $('#CarrierContent').html(data);
+                $('#CarrierAdd').modal(options);
+                $('#CarrierAdd').modal('show');
+            },
+            error: function () {
+                alert("Dynamic content load failed.");
+                $("#ajaxLoading1").hide();
+            }
+        });
+    });
+
+    $(".to_loc").focusout(function () {
+        debugger
+        var $buttonClicked = $(this);
+        var i_int_cur_line = $buttonClicked.attr('data');
+        var l_str_to_loc = $(this).val();
+        var l_int_line = parseFloat(i_int_cur_line) - 1;
+        var l_int_move_ctns = $("#mvctn_" + l_int_line).val();
+        var l_int_tot_ctns = $("#tot_ctns_" + l_int_line).val();
+        var l_str_from_loc = $("#loc_id_" + l_int_line).val();
+
+        if ((l_str_to_loc != "") && (l_str_to_loc != null)) {
+            if (l_str_to_loc == l_str_from_loc) {
+                sweetAlert("", "New Location can not be same as From Location ", "");
+                $("#to_loc_" + l_int_line).focus();
+                $("#to_loc_" + l_int_line).val("");
+                return false;
+            }
+
+            var l_int_ppk = $("#pkg_qty_" + l_int_line).val();
+            var l_int_move_qty = parseInt(l_int_ppk) * parseInt(l_int_move_ctns);
+            var l_int_move_qty = parseInt(l_int_move_qty);
+            $("#mvqty_" + l_int_line).val(l_int_move_qty);
+            if (l_int_move_qty > 0) {
+                $("#check_" + l_int_line).prop('checked', true);
+                $("#GridID_" + l_int_line).css("background-color", "#5ae77e");
+                p_str_check_value = true;
+                $('#one').val(p_str_check_value);
+            }
+        }
+        else {
+
+            $("#check_" + l_int_line).prop('checked', false);
+            $("#to_loc_" + l_int_line).val("");
+            p_str_check_value = false;
+            $('#one').val(p_str_check_value);
+            $("#GridID_" + l_int_line).css("background-color", "#ffffff");
+        }
+
+    });
+
+    $('#GridItemMove td[id="chkboxAll"]').click(function (event) {
+        debugger
+        var p_str_carrier_id = $('#ListGetContainerArrivalDetails_0__carrier_name').val();
+        if (typeof p_str_carrier_id === "undefined") {
+            p_str_carrier_id = $('#carrier_id').val();
+        }
+
+        var p_str_cmp_id = $('#cmp_id').val();
+        if (p_str_cmp_id == "") {
+            swal("", "Please Select The Company.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            $("#ajaxLoading1").hide();
+            return false;
+        }
+        $("#ajaxLoading1").show();
+        $.ajax({
+            type: "GET",
+            url: '/ContainerArrival/GetEmaildetials',
+            contentType: "application/json; charset=utf-8",
+            data: {
+                "p_str_carrier_id": p_str_carrier_id,
+                "p_str_cmp_id": p_str_cmp_id
+            },
+            datatype: "html",
+            success: function (e) {
+                swal({
+                    title: "Email Details",
+                    text: e,
+                    type: "",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true
+                });
+                $("#ajaxLoading1").hide();
+            },
+            error: function () {
+                alert("Cannot find Email details.");
+                $("#ajaxLoading1").hide();
+            }
+        });
+    });
+
+    $("#btnItemSave").click(function () {
+        debugger
+        $("#ajaxLoading1").show();
+        var p_str_cmp_id = $('#cmp_id').val();
+        if (p_str_cmp_id == "") {
+            swal("", "Please Select The Company.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            $("#ajaxLoading1").hide();
+            return false;
+        }
+
+        var p_str_adj_dt = $('#adj_date').val();
+        if (p_str_adj_dt == "") {
+            swal("", "Please Select The Arrival Date.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            $("#ajaxLoading1").hide();
+            return false;
+        }
+
+        var p_str_carrier_id = $('#carrier_name').val();
+        if (p_str_carrier_id == "") {
+            swal("", "Please Select The Carrier.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            $("#ajaxLoading").hide();
+            return false;
+        }
+
+        var p_str_cmp_id = $('#cmp_id').val();
+        var p_str_doc_id = $('#ib_doc_id').val();
+        var p_str_adj_dt = $('#adj_date').val();
+        var p_str_carrier_id = $('#ListGetContainerArrivalDetails_0__carrier_name').val();
+        if (typeof p_str_carrier_id === "undefined") {
+            p_str_carrier_id = $('#carrier_id').val();
+        }
+        var p_str_whs_id = $("#WhsID").val();
+        var getFormat = $('#id_format').find(":selected").text();
+        var p_str_type = getFormat;
+        var p_str_cont_id = $('#cont_id').val();
+        var p_str_event = "Add";
+        var p_str_Notes = $("#Note").val();
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Content("~/ContainerArrival/SaveContainerArrival")',
+            data: {
+                "p_str_cmp_id": p_str_cmp_id,
+                "p_str_doc_id": p_str_doc_id,
+                "p_str_adj_dt": p_str_adj_dt,
+                "p_str_carrier_id": p_str_carrier_id,
+                "p_str_whs_id": p_str_whs_id,
+                "p_str_type": p_str_type,
+                "p_str_cont_id": p_str_cont_id,
+                "p_str_event": p_str_event
+            },
+            dataType: 'html',
+            success: function (e) {
+                debugger;
+                if (e == 1) {
+                    $("#ajaxLoading1").hide();
+                    //sweetAlert("", "UserId" + p_str_user_id + "Alreadry Exist.", "");
+                    swal({
+                        title: "",
+                        text: "Saved Succesfully",
+                        type: "",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    },
+                    function () {
+                        $("#ajaxLoading1").hide();
+                    });
+                    clear();
+                }
+            },
+
+        });
+        $("#ajaxLoading1").hide();
+    });
+
+
+
+    $("#btnItemDelete").click(function () {
+        debugger
+        $("#ajaxLoading1").show();
+        var p_str_cmp_id = $('#cmp_id').val();
+        if (p_str_cmp_id == "") {
+            swal("", "Please Select The Company.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+
+        var p_str_adj_dt = $('#adj_date').val();
+        if (p_str_adj_dt == "") {
+            swal("", "Please Select The Arrival Date.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+
+        var p_str_carrier_id = $('#carrier_name').val();
+        if (p_str_carrier_id == "") {
+            swal("", "Please Select The Carrier.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+
+        var p_str_cmp_id = $('#cmp_id').val();
+        var p_str_doc_id = $('#ib_doc_id').val();
+        var p_str_adj_dt = $('#adj_date').val();
+        var p_str_carrier_id = $('#carrier_name').val();
+        if (typeof p_str_carrier_id === "undefined") {
+            p_str_carrier_id = $('#carrier_id').val();
+        }
+        var p_str_whs_id = $("#WhsID").val();
+        var p_str_type = $('#type').val();
+        var p_str_cont_id = $('#cont_id').val();
+        var p_str_Notes = $("#Note").val();
+        var p_str_event = "DELETE";
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Content("~/ContainerArrival/SaveContainerArrival")',
+            data: {
+                "p_str_cmp_id": p_str_cmp_id,
+                "p_str_doc_id": p_str_doc_id,
+                "p_str_adj_dt": p_str_adj_dt,
+                "p_str_carrier_id": p_str_carrier_id,
+                "p_str_whs_id": p_str_whs_id,
+                "p_str_type": p_str_type,
+                "p_str_cont_id": p_str_cont_id,
+                "p_str_event": p_str_event,
+            },
+            contentType: "application/json; charset=utf-8",
+            //dataType: "json",
+            datatype: "html",
+            success: function (e) {
+                if (e == 1) {
+                    $("#ajaxLoading1").hide();
+                    swal({
+                        title: "",
+                        text: "Succesfully Deleted",
+                        type: "",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    },
+
+                    function () {
+                        $("#ajaxLoading1").hide();
+                    });
+                }
+            }
+
+        });
+        clear();
+        $("#ajaxLoading1").hide();
+    });
+
+
+    function clear() {
+        debugger;
+        var p_str_cmp_id = $('#cmp_id').val()
+        window.location.href = "/ContainerArrival/DashboardContainerArrival?p_str_cmp_id" + p_str_cmp_id;
+    }
+
+    $('document').ready(function () {
+        $('#btnTest').click(function () {
+            $('#dummyModal').modal('show');
+        });
+    });
+</script>

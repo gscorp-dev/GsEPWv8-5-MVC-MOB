@@ -1,0 +1,512 @@
+﻿@model GsEPWv8_5_MVC.Model.StockChangeModel
+
+@{
+    var g_int_total_records = Model.ListGetItemMoveDetails.Count();
+}
+
+<style>
+    .hdrgridItemMove {
+        height: 49px;
+        background: #d2d6de;
+        padding-top: 10px;
+    }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="~/plugins/datatables/dataTables.bootstrap.css">
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Scripts/DateTimePicker/jquery.datetimepicker.css" rel="stylesheet" />
+<link href="~/Scripts/ManualSheets/jquery-ui.css" rel="stylesheet" />
+<link href="~/Scripts/sweetalert.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="~/Content/ItemMoveCSS.css">
+<input type="hidden" id="one" />
+<div style="display:none">
+    @Html.TextBoxFor(model => model.itm_code, new { @id = "ItmCode" })
+    @Html.TextBoxFor(model => model.whs_id, new { @id = "WhsID" })
+    @Html.TextBoxFor(model => model.po_num, new { @id = "PoNum" })
+</div>
+<center>
+    <div id="hdrgridItemMove" class="container-fluid">
+        <div class="row" style="background-color:lightgrey;">
+            <div style="width:100%;" class="container-fluid">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-xs-6 TotalRecords" style="text-align:right">
+                        <label style="text-align:left; font-size:14px; margin-top:5px">
+                            Total Records:
+                        </label>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2 totalCount" style="text-align:left">
+                        <label style="text-align:left; font-size:14px; margin-top:5px">
+                            @g_int_total_records
+                        </label>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:left">
+                        <button type="button" id="btnItemSave" class="btn-Save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="GridItemMove" class="table table-bordered table-striped" style="border:1px solid #121213;">
+            <thead class="tbl-header grid_backcolor">
+                <tr>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:8%;">
+                        Sl
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:21%;">
+                        FmLoc
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:18%;">
+                        TotCtns
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:13%;">
+                        PPK
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:20%">
+                        ToLoc
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:20%">
+                        All Ctns
+                    </th>
+                    <th class="grid_header_backcolor Item_Move_tblheader" style="width:20%;">
+                        MovCtns
+                    </th>
+                   
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                    <th style="display:none;"></th>
+                </tr>
+            </thead>
+            <tbody class="tbl-content" style="background-color:rgba(0, 0, 0, 0.12);">
+                @for (int i = 0; i < Model.ListGetItemMoveDetails.Count; i++)
+                {
+                    int line = i + 1;
+                    int ppk = (Model.ListGetItemMoveDetails[i].pkg_qty);
+                    <tr id="GridID_@i" style="background-color:white;">
+                        <td id="chkboxclick" id1="@line" id2="@ppk" style="text-align:center;">
+                            <input id="check_@i" name="chkItemMove" class="attribute" type="checkbox" />
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:21%">
+                            @Model.ListGetItemMoveDetails[i].loc_id
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :center; width:18%">
+                           @Html.TextBoxFor(model => model.ListGetItemMoveDetails[i].tot_ctns, new { @class = "ctn TableTextBox numericOnly", @id = "ctn_" + i, @style = "background-color:white;text-align :center;", @type = "number", @disabled = "true", @data = @line })
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :center; width:13%">
+                            @Model.ListGetItemMoveDetails[i].pkg_qty
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:20%">
+                            @Html.TextBoxFor(model => model.ListGetItemMoveDetails[i].to_loc, new { @class = "to_loc TableTextBox", @id = "to_loc_" + i, @style = "background-color:lightyellow;text-transform:uppercase", @data = @line })
+                        </td>
+                        <td id="chkboxAll" id1="@line" id2="@ppk" style="text-align:center;">
+                            <input id="checkAll_@i" name="chkItemctnsAll" class="attribute" type="checkbox" />
+                        </td>
+                        <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold;text-align :center; width:20%">
+                            @Html.TextBoxFor(model => model.ListGetItemMoveDetails[i].move_ctns, new { @class = "mvctn TableTextBox numericOnly", @id = "mvctn_" + i, @style = "background-color:lightyellow;text-align :center;", @type = "number", @data = @line })
+                        </td>
+
+                        <!--Display None - Region-->
+                        <td style="font-size:12px; color:black; font-weight:bold;text-align :left;display:none">
+                            @Html.TextBoxFor(model => Model.ListGetItemMoveDetails[i].move_qty, new { @class = "mvqty TableTextBox", @id = "mvqty_" + i, @disabled = "true", @style = "background-color:lightyellow;", @data = @line })
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;  display:none;">
+                            @Model.ListGetItemMoveDetails[i].tot_qty
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold; display:none;">
+                            @Model.ListGetItemMoveDetails[i].ib_doc_id
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                            @Model.ListGetItemMoveDetails[i].rcvd_dt
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                            @Model.ListGetItemMoveDetails[i].cont_id
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                            @Model.ListGetItemMoveDetails[i].lot_id
+                        </td>
+                        <td style="font-size:12px; color:black; font-weight:bold; text-align :left; display:none;">
+                            @Model.ListGetItemMoveDetails[i].palet_id
+                        </td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].tot_ctns, new { @class = "tot_ctns", @id = "tot_ctns_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].tot_ctns</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].pkg_qty, new { @class = "pkg_qty", @id = "pkg_qty_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].pkg_qty</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].tot_qty, new { @class = "tot_qty", @id = "tot_qty_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].tot_qty</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].cont_id, new { @class = "cont_id", @id = "cont_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].cont_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].ib_doc_id, new { @class = "ib_doc_id", @id = "ib_doc_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].ib_doc_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].lot_id, new { @class = "lot_id", @id = "lot_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].lot_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].palet_id, new { @class = "palet_id", @id = "palet_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].palet_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].loc_id, new { @class = "loc_id", @id = "loc_id_" + i, @style = "width:1px;text-align:right;" })@Model.ListGetItemMoveDetails[i].loc_id</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].rcvd_dt, new { @class = "rcvd_dt", @id = "rcvd_dt_" + i, @style = "width:1px;text-align:left;" })@Model.ListGetItemMoveDetails[i].rcvd_dt</td>
+                        <td style="font-size:10px; color:black; font-weight:bold;display:none;">@Html.HiddenFor(model => model.ListGetItemMoveDetails[i].po_num, new { @class = "po_num", @id = "po_num_" + i, @style = "width:1px;text-align:left;" })@Model.ListGetItemMoveDetails[i].po_num</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.Hidden("hdn_total_records", g_int_total_records)
+    </div>
+</center>
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/DateTimePicker/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/AutoComplete/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="~/Scripts/sweetalert.js"></script>
+
+<script src="~/Scripts/DateTimePicker/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/sweetalert.js"></script>
+<link href="~/Scripts/sweetalert.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(".to_loc").autocomplete({
+        matchContains: true,
+        minChars: 1,
+        mustMatch: true,
+        source: "/StockChange/ItemXGetLocDtl?cmp_id=" + $('#cmp_id').val() + "&",
+        select: function (event, ui) {
+            debugger
+            $("#to_loc").val(ui.item.loc_id);
+            closeOnSelect: true
+        }
+    });
+    $(".ui-autocomplete").css("z-index", "2147483647");
+</script>
+
+<script>
+    $(window).on("load resize ", function () {
+        var scrollWidth = $('#tbl-content').width() - $('#tbl-content table').width();
+        $('#tbl-header').css({ 'padding-right': scrollWidth });
+    }).resize();
+    var p_str_check_value = false;
+    $(".numericOnly").bind('keypress', function (e) {
+        if (e.keyCode == '9' || e.keyCode == '16') {
+            return;
+        }
+        var code;
+        if (e.keyCode) code = e.keyCode;
+        else if (e.which) code = e.which;
+        if (e.which == 46)
+            return false;
+        if (code == 8 || code == 46)
+            return true;
+        if (code < 48 || code > 57)
+            return false;
+    });
+    $('#GridItemMove').DataTable({
+        "pagingType": "simple_numbers",
+        "paging": true,
+        "sDom": 'Rfrtlip',
+        "info": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "autoWidth": false,
+    });
+    $(".to_loc").focusout(function () {
+        debugger
+        var $buttonClicked = $(this);
+        var i_int_cur_line = $buttonClicked.attr('data');
+        var l_str_to_loc = $(this).val();
+        var l_int_line = parseFloat(i_int_cur_line) - 1;
+        var l_int_move_ctns = $("#mvctn_" + l_int_line).val();
+        var l_int_tot_ctns = $("#tot_ctns_" + l_int_line).val();
+        var l_str_from_loc = $("#loc_id_" + l_int_line).val();
+
+        if ((l_str_to_loc != "") && (l_str_to_loc != null))
+            {
+            if (l_str_to_loc == l_str_from_loc)
+            {
+                sweetAlert("", "New Location can not be same as From Location ", "");
+                $("#to_loc_" + l_int_line).focus();
+                $("#to_loc_" + l_int_line).val("");
+                return false;
+            }
+
+            var l_int_ppk = $("#pkg_qty_" + l_int_line).val();
+            var l_int_move_qty = parseInt(l_int_ppk) * parseInt(l_int_move_ctns);
+            var l_int_move_qty = parseInt(l_int_move_qty);
+            $("#mvqty_" + l_int_line).val(l_int_move_qty);
+            if (l_int_move_qty > 0)
+                {
+                    $("#check_" + l_int_line).prop('checked', true);
+                    $("#GridID_" + l_int_line).css("background-color", "#5ae77e");
+                    p_str_check_value = true;
+                    $('#one').val(p_str_check_value);
+                }
+        }
+        else {
+
+                $("#check_" + l_int_line).prop('checked', false);
+                $("#to_loc_" + l_int_line).val("");
+                p_str_check_value = false;
+                $('#one').val(p_str_check_value);
+                $("#GridID_" + l_int_line).css("background-color", "#ffffff");
+             }
+
+    });
+    $(".mvctn").blur(function () {
+        debugger
+
+        var $buttonClicked = $(this);
+        var i_int_cur_line = $buttonClicked.attr('data');
+        var l_int_line = parseFloat(i_int_cur_line) - 1;
+        var l_str_to_loc = $("#to_loc_" + l_int_line).val();
+        var l_int_move_ctns = parseInt($(this).val());
+        var l_int_tot_ctns = parseInt($("#tot_ctns_" + l_int_line).val());
+
+        if (l_int_move_ctns != 0)
+        {
+            if (l_int_move_ctns > l_int_tot_ctns)
+            {
+                sweetAlert("", "Move Ctns(s) Can not be greater than available Ctn(s)", "");
+                $("#mvctn_" + l_int_line).focus();
+                $("#mvctn_" + l_int_line).val("0");
+                return false;
+            }
+            var l_int_ppk = $("#pkg_qty_" + l_int_line).val();
+            var l_int_move_qty = parseInt(l_int_ppk) * parseInt(l_int_move_ctns);
+            var l_int_move_qty = parseInt(l_int_move_qty);
+            $("#mvqty_" + l_int_line).val(l_int_move_qty);
+            if ((l_str_to_loc != "") && (l_str_to_loc != null))
+              {
+                $("#check_" + l_int_line).prop('checked', true);
+                $("#GridID_" + l_int_line).css("background-color", "#5ae77e");
+                p_str_check_value = true;
+                $('#one').val(p_str_check_value);
+               }
+
+            }
+        else
+        {
+            if (l_int_move_ctns == 0)
+            {
+                $("#check_" + l_int_line).prop('checked', false);
+                $("#mvqty_" + l_int_line).val("0");
+                p_str_check_value = false;
+                $('#one').val(p_str_check_value);
+                $("#GridID_" + l_int_line).css("background-color", "#ffffff");
+            }
+        }
+    });
+    $('#GridItemMove td[id="chkboxAll"]').click(function (event) {
+        debugger
+        //Item_Move_tblheader
+        var l_int_cur_line = $(this).attr('id1');
+        var l_int_cur_line = l_int_cur_line - 1;
+        var l_bool_is_selected = $(this).val();
+        var l_chkbox = "checkAll_" + l_int_cur_line
+        var l_str_is_selected = document.getElementById(l_chkbox).checked;
+        if (l_str_is_selected) {
+            var l_str_to_loc = $("#to_loc_" + l_int_cur_line).val();
+            var l_int_ctns = $("#ctn_" + l_int_cur_line).val();
+            var l_int_move_ctns = $("#ctn_" + l_int_cur_line).val();//If #ctn_ qty is zero message will popup.
+            $("#mvctn_" + l_int_cur_line).val(l_int_ctns);
+            if (l_int_move_ctns == 0) {
+                sweetAlert("", "Please enter the Move Ctns(s)", "");
+                $("#check_" + l_int_cur_line).prop('checked', false);
+                $("#mvqty_" + l_int_cur_line).val("0");
+                $("#mvctn_" + l_int_cur_line).val("0");
+                p_str_check_value = false;
+                $("#GridID_" + l_int_cur_line).css("background-color", "#ffffff");
+                return false;
+            }
+
+        }
+        else
+        {
+            p_str_check_value = false;
+            $("#mvqty_" + l_int_cur_line).val("0");
+            $("#mvctn_" + l_int_cur_line).val("0");
+            $("#GridID_" + l_int_cur_line).css("background-color", "#ffffff");
+            $("#check_" + l_int_cur_line).prop('checked', false);
+        }
+
+    });
+
+    $('#GridItemMove td[id="chkboxclick"]').click(function (event) {
+        debugger
+        var l_int_cur_line = $(this).attr('id1');
+        var l_int_cur_line = l_int_cur_line - 1;
+        var l_bool_is_selected = $(this).val();
+        var l_chkbox = "check_" + l_int_cur_line
+        var l_str_is_selected = document.getElementById(l_chkbox).checked;
+        if (l_str_is_selected) {
+            var l_str_to_loc = $("#to_loc_" + l_int_cur_line).val();
+            var l_int_move_ctns = $("#mvctn_" + l_int_cur_line).val();
+            if ((l_str_to_loc == "") || (l_str_to_loc == null)) {
+                sweetAlert("", "Please enter the To Location", "");
+                $("#check_" + l_int_cur_line).prop('checked', false);
+                $("#to_loc_" + l_int_cur_line).val("");
+                p_str_check_value = false;
+                $("#GridID_" + l_int_cur_line).css("background-color", "#ffffff");
+                return false;
+            }
+
+            if (l_int_move_ctns == 0) {
+                sweetAlert("", "Please enter the Move Ctns(s)", "");
+                $("#check_" + l_int_cur_line).prop('checked', false);
+                $("#mvqty_" + l_int_cur_line).val("0");
+                $("#mvctn_" + l_int_cur_line).val("0");
+                p_str_check_value = false;
+                $("#GridID_" + l_int_cur_line).css("background-color", "#ffffff");
+                return false;
+            }
+
+        }
+
+        else {
+            p_str_check_value = false;
+            $("#to_loc_" + l_int_cur_line).val("");
+            $("#mvqty_" + l_int_cur_line).val("0");
+            $("#mvctn_" + l_int_cur_line).val("0");
+            $("#GridID_" + l_int_cur_line).css("background-color", "#ffffff");
+            $("#check_" + l_int_cur_line).prop('checked', false);
+            $("#checkAll_" + l_int_cur_line).prop('checked', false);
+        }
+
+    });
+
+    $("#btnItemSave").click(function () {
+        debugger
+        $("#ajaxLoading").show();
+        var p_str_cmp_id = $('#cmp_id').val();
+        if (p_str_cmp_id == "") {
+            swal("", "Please Select The Company.", "");
+            $('#cmp_id').focus();
+            $('body,html').animate({ scrollTop: 0 }, 0);
+            er = 1;
+            return false;
+        }
+
+
+        var l_int_sel_count = $("input[name='chkItemMove']:checked").length;
+        if (l_int_sel_count > 0)
+        {
+            var l_int_tot_rec = $("#hdn_total_records").val();
+            var ListItemStockMove = new Array();
+            for (var i = 0; i < l_int_tot_rec; i++)
+            {
+
+                var l_chkbox = "check_" + i;
+                var l_str_is_selected = document.getElementById(l_chkbox).checked;
+                if (l_str_is_selected)
+                {
+                    var p_str_cmp_id = $('#cmp_id').val();
+                    var p_str_adj_doc_id = "";
+                    var p_str_adj_dt = "";
+                    var p_str_itm_code = $("#ItmCode").val();
+                    var p_str_whs_id = $("#WhsID").val();
+                    var p_str_po_num = $("#po_num_" + i).val();
+                    var p_str_ib_doc_id = $("#ib_doc_id_" + i).val();
+                    var p_str_rcvd_dt = $("#rcvd_dt_" + i).val();
+                    var p_str_cont_id = $("#cont_id_" + i).val();
+                    var p_str_lot_id = $("#lot_id_" + i).val();
+                    var p_str_palet_id = $("#palet_id_" + i).val();
+                    var p_str_loc_id_from = $("#loc_id_" + i).val();
+                    var p_str_ctn_qty = $("#pkg_qty_" + i).val();
+                    var p_str_tot_ctns = $("#tot_ctns_" + i).val();
+                    var p_str_loc_id_to = $("#to_loc_" + i).val();
+                    var p_str_move_ctns = $("#mvctn_" + i).val();
+                    var p_str_move_qty = $("#mvqty_" + i).val();
+                    var p_str_tot_qty = $("#tot_qty_" + i).val();
+                    var p_str_user_id = "";
+                    var p_str_process_id = "";
+
+                    var p_str_itm_num = $("#Itmdtl").val();
+                    var p_str_itm_color = $("#itm_color").val();
+                    var p_str_itm_size = $("#itm_size").val();
+
+                    var obj_itm_move = {};
+                    obj_itm_move.cmp_id = p_str_cmp_id;
+                    obj_itm_move.adj_doc_id = p_str_adj_doc_id;
+                    obj_itm_move.adj_dt = p_str_adj_dt;
+                    obj_itm_move.itm_code = p_str_itm_code;
+                    obj_itm_move.whs_id = p_str_whs_id;
+                    obj_itm_move.ib_doc_id = p_str_ib_doc_id;
+                    obj_itm_move.rcvd_dt = p_str_rcvd_dt;
+                    obj_itm_move.cont_id = p_str_cont_id;
+                    obj_itm_move.lot_id = p_str_lot_id;
+                    obj_itm_move.palet_id = p_str_palet_id;
+                    obj_itm_move.po_num = p_str_po_num;
+                    obj_itm_move.loc_id_from = p_str_loc_id_from;
+
+                    obj_itm_move.ctn_qty = p_str_ctn_qty;
+                    obj_itm_move.tot_ctns = p_str_tot_ctns;
+                    obj_itm_move.loc_id_to = p_str_loc_id_to.toUpperCase();
+                    obj_itm_move.move_ctns = p_str_move_ctns;
+                    obj_itm_move.user_id = p_str_user_id;
+                    obj_itm_move.process_id = p_str_process_id;
+                    ListItemStockMove.push(obj_itm_move);
+                }
+
+            }
+
+            var p_str_itm_code = $("#ItmCode").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Content("~/StockChange/SaveItemMove")',
+                data: JSON.stringify({
+                    "p_str_cmp_id": p_str_cmp_id,
+                    ListItemStockMove: ListItemStockMove
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+
+                success: function (e) {
+                    $("#ajaxLoading").hide();
+                    swal({
+                        title: "",
+                        text: "Item Move Saved Successfully",
+                        type: "",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    },
+
+                    function () {
+                        setTimeout(function () {
+                            $.ajax({
+                                type: "get",
+                                url: "/StockChange/DashboardStkChangeItemdtl",
+                                data: {
+                                    "p_str_cmp_id": p_str_cmp_id,
+                                    "Itemcode": p_str_itm_code
+                                },
+                                datatype: 'html',
+                                success: function (e) {
+                                    debugger
+                                    $("#ajaxLoading").hide();
+                                    $('#Itemgrid').html("");
+                                    $('#Itemgrid').html(e);
+                                },
+                            })
+                        });
+                    });
+                }
+            });
+        }
+        else
+        {
+            swal("", "No records selected to Move", "");
+            $("#ajaxLoading").hide();
+            return false;
+        }
+
+
+    });
+</script>

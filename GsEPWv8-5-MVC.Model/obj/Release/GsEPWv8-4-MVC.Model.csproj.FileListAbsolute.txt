@@ -1,0 +1,7 @@
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Model\bin\Release\GsEPWv8-4-MVC.Model.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Model\bin\Release\GsEPWv8-4-MVC.Model.pdb
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Model\bin\Release\GsEPWv8-4-MVC.Core.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Model\bin\Release\GsEPWv8-4-MVC.Core.pdb
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Model\obj\Release\GsEPWv8-4-MVC.Model.csprojResolveAssemblyReference.cache
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Model\obj\Release\GsEPWv8-4-MVC.Model.dll
+D:\PROD-SOURCE\GsEPWv8-4-MVC-MOB\GsEPWv8-4-MVC.Model\obj\Release\GsEPWv8-4-MVC.Model.pdb

@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <link rel="icon" type="image/ico" href="~/Images/Gs3PL.ico" width="10" height="10" />
+    <title>GsEPWv8-5-MVC| Inventory Item Move</title>
+    <!-- First include jquery js -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- Item Move Layout CSS -->
+    <link rel="stylesheet" href="~/Content/ItemMoveCSS.css">
+</head>
+
+<body class="MobileView">
+        <br />
+        <div class="MobileViewHeader">
+            <center>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div style="margin-left:45%; margin-right:45%;">
+                                <a href=@System.Configuration.ConfigurationManager.AppSettings["CompanyWebLink"].ToString() target="_blank">
+                                    <img class="CompanyLogo img-esponsive" style="width:100px;height:100px;" src=@System.Configuration.ConfigurationManager.AppSettings["CompanyLogo"].ToString()>
+                                    
+                                </a>
+                            </div>
+                            @*<div style="margin-left:45%; margin-right:45%;">
+                                <a href=@System.Configuration.ConfigurationManager.AppSettings["CompanyWebLink"].ToString() target="_blank">
+                                    <img src="../Images/hndshk.jpg" width="150" height="60" style="margin-bottom:16px;">
+                                </a>
+                            </div>*@
+                        </div>
+                        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                            <table style="width:100%">
+                                <tr>
+                                    <td>
+                                        <label class="WelcomeText" style="color:coral">
+                                           @Session["UserfstName"]  @Session["UserlstName"]
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="WelcomeText">
+                                            @System.Configuration.ConfigurationManager.AppSettings["AppWelcome"].ToString()
+                                        </label>
+                                    </td>
+                                    <td align="right">
+                                        <a href="@Url.Action("Logout", "Login")">
+                                            <label class="LogoutText" style="cursor:pointer">LOGOUT</label>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </center>
+        </div>
+        <div style="border-bottom: 5px solid #3399ff;">
+        </div>
+        <div style="border-bottom: 5px solid #ffcc99;">
+        </div>
+        <br />
+        @RenderBody()
+        <hr>
+        <footer>
+            <div class="ItemMoveFooter">
+                <b>Version</b> 8.5.0
+                <strong>
+                    Copyright &copy; 2017-2020
+                    <a href="http://www.gensoftcorp.com/Home.aspx?Type=Home">GensoftCorp</a>.
+                </strong> All rights reserved.
+            </div>
+        </footer>
+</body>
+</html>
