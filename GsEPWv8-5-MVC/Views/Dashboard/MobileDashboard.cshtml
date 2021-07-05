@@ -114,6 +114,32 @@
                     </div>
                 </div>
                 <br />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn" style="width:300px;text-align:center;">
+                                <div class="login100-form-bgbtn"></div>
+                                <button style="width:100%;text-align:center;background-color:transparent;height:50px;text-transform:uppercase;font-size:16px; font-family:Poppins-Medium" id="btn_IBScanIN">
+                                    IB Scan IN
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn" style="width:300px;text-align:center;">
+                                <div class="login100-form-bgbtn"></div>
+                                <button style="width:100%;text-align:center;background-color:transparent;height:50px;text-transform:uppercase;font-size:16px; font-family:Poppins-Medium" id="btn_IBScanOUT">
+                                    IB Scan OUT
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
             </fieldset>
         </div>
     </div>
@@ -161,6 +187,14 @@
     $("#btn_ContArrival").click(function () {
         var p_str_cmp_id = $('#cmp_id').val()
         window.location.href = "/ContainerArrival/DashboardContainerArrival?p_str_cmp_id" + p_str_cmp_id;
+    });
+    $("#btn_IBScanIN").click(function () {
+        var p_str_cmp_id = $('#cmp_id').val()
+        window.location.href = "/InBoundScanIn/DashboardInBoundScanIn?p_str_cmp_id" + p_str_cmp_id;
+    });
+    $("#btn_IBScanOUT").click(function () {
+        var p_str_cmp_id = $('#cmp_id').val()
+        window.location.href = "/InBoundScanIn/DashboardInBoundScanIn?p_str_cmp_id" + p_str_cmp_id;
     });
     $("#btn_EmptyCont").click(function () {
         var p_str_cmp_id = $('#cmp_id').val()

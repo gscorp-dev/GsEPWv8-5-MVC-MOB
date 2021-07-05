@@ -1,0 +1,50 @@
+﻿@model GsEPWv8_5_MVC.Model.InBoundScanHeaderModel
+
+@{
+    var g_int_total_records = Model.ListGetContainerArrivalDetails.Count() == 0 ? 2:4;
+}
+
+
+<style>
+    .hdrgridItemMove {
+        height: 49px;
+        background: #d2d6de;
+        padding-top: 10px;
+    }
+</style>
+
+<input type="hidden" id="one" />
+<input type="hidden" value="@ViewBag.emailList" id="l_str_emailList" />
+
+<center>
+    
+    <table id="InbndRcvdDtl" class="table table-bordered table-striped" style="border:1px solid #121213 ;">
+        <thead class="grid_backcolor">
+            <tr>
+                <th class="grid_header_backcolor" style="font-size:11px;width:8%;">ItemCode</th>
+                <th class="grid_header_backcolor" style="font-size:11px;width:8%;">Style</th>
+                <th class="grid_header_backcolor" style="font-size:11px;width:8%;">Color</th>
+                <th class="grid_header_backcolor" style="font-size:11px;width:7%;">Size</th>
+                <th class="grid_header_backcolor" style="font-size:11px;width:5%;">ppk</th>
+                <th class="grid_header_backcolor" style="font-size:11px;width:5%;">Ctn</th>
+                <th class="grid_header_backcolor" style="font-size:11px;width:6%;">TotQty</th>
+            </tr>
+        </thead>
+        <tbody style="background-color:rgba(0, 0, 0, 0.12);">
+            <tr>
+                <td><label style="text-align:left; font-size:14px; margin-top:5px">
+    @g_int_total_records
+</label></td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+            </tr>
+        </tbody>
+    </table>
+</center>
+
+
+

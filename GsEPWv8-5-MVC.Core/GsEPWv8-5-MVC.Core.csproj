@@ -52,6 +52,8 @@
     <Compile Include="Entity\DashBoard.cs" />
     <Compile Include="Entity\Email.cs" />
     <Compile Include="Entity\ForgotPassword.cs" />
+    <Compile Include="Entity\InBoundScanHeader.cs" />
+    <Compile Include="Entity\ItemScanIN.cs" />
     <Compile Include="Entity\Login.cs" />
     <Compile Include="Entity\LookUp.cs" />
     <Compile Include="Entity\MailConfig.cs" />

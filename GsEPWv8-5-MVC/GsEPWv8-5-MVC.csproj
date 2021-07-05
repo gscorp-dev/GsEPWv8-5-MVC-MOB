@@ -192,6 +192,7 @@
     <Compile Include="Controllers\CarrierMasterController.cs" />
     <Compile Include="Controllers\EmptyContainerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\InBoundScanInController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ContainerArrivalController.cs" />
     <Compile Include="Controllers\StockInquiryController.cs" />
@@ -1405,6 +1406,8 @@
     <Content Include="Views\Shared\_CarrierMaster.cshtml" />
     <Content Include="Views\EmptyContainer\DashboardEmptyContainer.cshtml" />
     <Content Include="Views\Shared\_DashboardEmptyContainer.cshtml" />
+    <Content Include="Views\InBoundScanIn\DashboardInBoundScanIn.cshtml" />
+    <Content Include="Views\Shared\_DashboardInBoundScanIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
