@@ -193,6 +193,7 @@ namespace GsEPWv8_5_MVC.Model
         public IList<StockInquiryDtl> LstAuditOnlyIsm { get; set; }
         public IList<AuditItemDtl> LstAuditItemDtl { get; set; }
         public IList<Email> ListEamilDetail { get; set; }
+        public InboundInquiry InboundInquiry { get; set; }
 
     }
 

@@ -58,6 +58,7 @@
     <Compile Include="Implementation\MailConfigRepository.cs" />
     <Compile Include="Implementation\PickRepository.cs" />
     <Compile Include="Implementation\ContainerArrivalRepository.cs" />
+    <Compile Include="Implementation\ScanInRepository.cs" />
     <Compile Include="Implementation\StockChangeRepository.cs" />
     <Compile Include="Implementation\StockInquiryRepository.cs" />
     <Compile Include="Implementation\UserAccountRepository.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Interface\IMailConfigRepository.cs" />
     <Compile Include="Interface\IPickRepository.cs" />
     <Compile Include="Interface\IContainerArrivalRepository.cs" />
+    <Compile Include="Interface\IScanInRepository.cs" />
     <Compile Include="Interface\IStockChangeRepository.cs" />
     <Compile Include="Interface\IUserAccountRepository.cs" />
     <Compile Include="Interface\IUserProfileRepository.cs" />

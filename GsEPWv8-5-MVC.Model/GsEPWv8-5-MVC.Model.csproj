@@ -49,6 +49,7 @@
     <Compile Include="DashBoardModel.cs" />
     <Compile Include="EmailModel.cs" />
     <Compile Include="ForgotPasswordModel.cs" />
+    <Compile Include="InboundInquiryModel.cs" />
     <Compile Include="InBoundScanHeaderModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="LookUpModel.cs" />

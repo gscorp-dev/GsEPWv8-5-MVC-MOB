@@ -198,10 +198,10 @@
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <div id='CarrierAdd' class='modal' style="padding-top:73px;padding-left:150px">
+    <div id='CarrierAdd' class='modal' style="padding-top:73px;padding-left:50px">
         <div class="modal-dialog">
-            <div class="modal-content" style="width:100%; left:0px;">
-                <div id='CarrierContent' style="width: 100%; height:500px;"></div>
+            <div class="modal-content" style="width: 1140px;height: 655px;" >
+                <div id='CarrierContent' style="width: 1140px;height: 655px;"></div>
             </div>
         </div>
     </div>
@@ -398,6 +398,7 @@
                 var p_str_cmpid = $('#cmp_id').val();
                 var p_str_whsId = $('#whs_id').val();
                 var p_str_contId = $('#cont_id').val();
+                var p_str_docid = $('#doc_id').val();
 
                 $("#ajaxLoading").show();
 
@@ -407,7 +408,7 @@
                     contentType: "application/json; charset=utf-8",
                     data: {
                         "p_str_cmpid": p_str_cmpid, "p_str_whsId": p_str_whsId,
-                        "p_str_contId": p_str_contId, "p_str_event": "Arrive"
+                        "p_str_contId": p_str_contId, "p_str_event": "Arrive", "p_str_docid": p_str_docid
                     },
 
                     dataType: 'html',

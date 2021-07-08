@@ -1,7 +1,7 @@
 ﻿@model GsEPWv8_5_MVC.Model.InBoundScanHeaderModel
 
 @{
-    var g_int_total_records = Model.ListGetContainerArrivalDetails.Count() == 0 ? 2:4;
+    var g_int_total_records = Model.ListGetContainerArrivalDetails.Count() == 0 ? 2 : 4;
 }
 
 
@@ -17,7 +17,7 @@
 <input type="hidden" value="@ViewBag.emailList" id="l_str_emailList" />
 
 <center>
-    
+
     <table id="InbndRcvdDtl" class="table table-bordered table-striped" style="border:1px solid #121213 ;">
         <thead class="grid_backcolor">
             <tr>
@@ -31,20 +31,117 @@
             </tr>
         </thead>
         <tbody style="background-color:rgba(0, 0, 0, 0.12);">
-            <tr>
-                <td><label style="text-align:left; font-size:14px; margin-top:5px">
-    @g_int_total_records
-</label></td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-            </tr>
+
+
+            @for (int i = 0; i < Model.InboundInquiry.ListAckRptDetails.Count; i++)
+            {
+                int line = i + 1;
+                var obj = @Model.InboundInquiry.ListAckRptDetails[i];
+                <tr>
+                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Itm_Code
+                        <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline;color:blue;"  
+                           dCmpID="@obj.cmp_id" 
+                           dDocID="@obj.ib_doc_id"
+                           dItm_Code="@obj.Itm_Code"
+                       dStyle="@obj.Style"
+                       dColor="@obj.Color"
+                       dSize="@obj.Size"
+                       dItemName="@obj.itm_name"
+                       dppk="@obj.ppk"
+                       dColor1="@obj.Color"
+                       dCtn="@obj.ctn"
+                       dTotalQty="@obj.TotalQty"  class="AddNewCarrierMethod">
+                        <span class="glyphicon glyphicon-plus" style="font-size: 20px;"></span><b></b></a>
+                    </td>
+                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Style</td>
+                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Color</td>
+                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Size</td>
+                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].ppk</td>
+                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].ctn</td>
+                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].TotalQty</td>
+                </tr>
+            }
+
         </tbody>
     </table>
 </center>
+<script>
+    $(document).ready(function () {
+        $(".NpAddNewCarrierMethod").click(function () {
+            debugger
+            debugger
+            var options = { "backdrop": "static", keyboard: true };
+            $("#ajaxLoading").show();
+            $.ajax({
+                type: "GET",
+                url: '/ContainerArrival/AddCarrierMaster',
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                datatype: "json",
+                success: function (data) {
+                    $("#ajaxLoading").hide();
+                    $('#CarrierContent').html(data);
+                    $('#CarrierAdd').modal(options);
+                    $('#CarrierAdd').modal('show');
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                    $("#ajaxLoading").hide();
+                }
+            });
+        });
 
+        $(".AddNewCarrierMethod").click(function () {
+            debugger;
+            var TeamDetailPostBackURL = '/InBoundScanIn/LoadScanSerialDetails';
+            //var cmp_id = $("#cmp_id").val();
+            var $buttonClicked = $(this);
+            var $buttonClicked = $(this);
+            @*var id = $("#ibdocid").val();
+            dCmpID = "@obj.cmp_id"
+            dDocID = "@obj.ib_doc_id"*@
+            var cmp_id = $buttonClicked.attr('dCmpID');
+            var id = $buttonClicked.attr('dDocID');
+            var dItm_Code = $buttonClicked.attr('dItm_Code');
+            var dStyle = $buttonClicked.attr('dStyle');
+            var dColor = $buttonClicked.attr('dColor');
+            var dSize = $buttonClicked.attr('dSize');
+            var dItemName = $buttonClicked.attr('dItemName');
+            var dppk = $buttonClicked.attr('dppk');
+            var data6 = $buttonClicked.attr('dColor');
+            var dCtn = $buttonClicked.attr('dCtn');
+            var dTotalQty = $buttonClicked.attr('dTotalQty');
 
+            // alert(data);
+            //alert(data1);
+            //alert(data2);
+            //alert(data3);
+            //alert(data4); alert(data5); alert(data6); alert(data7); alert(data8);
 
+            var options = { "backdrop": "static", keyboard: true };
+            // alert(cmp_id);
+            // alert(id);
+            $("#ajaxLoading").show();
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id, "cmp_id": cmp_id, "Itm_Code": dItm_Code, "Style": dStyle, "Color": dColor, "Size": dSize, "itm_name": dItemName, "ppk": dppk, "ctn": dCtn, "TotalQty": dTotalQty },
+                datatype: "json",
+                success: function (data) {
+                    $("#ajaxLoading").hide();
+                    $('#CarrierContent').html(data);
+                    $('#CarrierAdd').modal(options);
+                    $('#CarrierAdd').modal('show');
+                    //$('#myModalContent').html(data);
+                    //$('#myModal').modal(options);
+                    //$('#myModal').modal('show');``
+                },
+                error: function () {
+                    $("#ajaxLoading").hide();         //CR_3PL_MVC_IB_2018_0228_002 Added By Meera 28-02-2018
+                    swal("Dynamic content load failed.");
+                }
+            });
+        });
+    });
+</script>

@@ -94,5 +94,6 @@ namespace GsEPWv8_5_MVC.Core.Entity
         public IList<Email> ListEamilDetail { get; set; }
         public IList<ItemScanIN> ListItemScanIN { get; set; }
         public ItemScanIN ItemScanIN { get; set; }
+        public InboundInquiry InboundInquiry { get; set; }
     }
 }

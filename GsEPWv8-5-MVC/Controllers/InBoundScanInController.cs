@@ -11,7 +11,8 @@ using GsEPWv8_5_MVC.Common;
 using System.Web.UI.WebControls;
 using System.Net.Mail;
 using System.Text;
-
+using GsEPWv8_4_MVC.Business.Interface;
+using GsEPWv8_4_MVC.Business.Implementation;
 
 namespace GsEPWv8_4_MVC.Controllers
 {
@@ -114,36 +115,42 @@ namespace GsEPWv8_4_MVC.Controllers
             var List = ServiceObject.ItemXGetLocDetails(term.Trim(), cmp_id).LstItmxlocdtl.Select(x => new { label = x.loc_id, value = x.loc_id }).ToList();
             return Json(List, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult DashboardInBoundSerialGrid(string p_str_cmpid, string p_str_whsId, string p_str_contId, string p_str_event)
+        public ActionResult DashboardInBoundSerialGrid(string p_str_cmpid, string p_str_whsId, string p_str_contId, string p_str_event, string p_str_docid)
         {
-            InBoundScanHeader objContainerArrival = new InBoundScanHeader();
+            InBoundScanHeader objIBScanIn = new InBoundScanHeader();
             IContainerArrivalService ServiceObject = new ContainerArrivalServiceService();
-            objContainerArrival.cmp_id = p_str_cmpid;
-            objContainerArrival.whs_id = p_str_whsId;
-            objContainerArrival.cont_id = p_str_contId;
-            objContainerArrival.mevent = p_str_event;
-
+            IIBScanInService ObjIBScanInService = new IBScanInService();
+            objIBScanIn.cmp_id = p_str_cmpid;
+            objIBScanIn.whs_id = p_str_whsId;
+            objIBScanIn.cont_id = p_str_contId;
+            objIBScanIn.mevent = p_str_event;
+            objIBScanIn.ib_doc_id = p_str_docid;
+            objIBScanIn.InboundInquiry = new InboundInquiry();
+            objIBScanIn.InboundInquiry.cmp_id = p_str_cmpid;
+            objIBScanIn.InboundInquiry.cont_id = p_str_contId;
+            objIBScanIn.InboundInquiry.ib_doc_id = p_str_docid;
+            objIBScanIn.InboundInquiry = ObjIBScanInService.GetInboundHdrDtl(objIBScanIn.InboundInquiry);
             //objContainerArrival = ServiceObject.GetContainerArrivalDetails(objContainerArrival);
             //objContainerArrival.ListGetCarrierDetails = ServiceObject.GetCarrierDetails(objContainerArrival);
-            objContainerArrival.ListEamilDetail = ServiceObject.GetCMBbandCarrierEMailDetails(p_str_cmpid);
+            objIBScanIn.ListEamilDetail = ServiceObject.GetCMBbandCarrierEMailDetails(p_str_cmpid);
 
 
             int initInt = 0;
             string strEmaillist = "";
-            for (int i = 0; i < objContainerArrival.ListEamilDetail.Count; i++)
+            for (int i = 0; i < objIBScanIn.ListEamilDetail.Count; i++)
             {
-                if (objContainerArrival.ListEamilDetail.Count > 0)
+                if (objIBScanIn.ListEamilDetail.Count > 0)
                 {
                     if (initInt == 0)
                     {
-                        strEmaillist = objContainerArrival.ListEamilDetail[i].email;
+                        strEmaillist = objIBScanIn.ListEamilDetail[i].email;
                         strEmaillist = strEmaillist.Replace("CLIENT: ", "");
                         strEmaillist = strEmaillist.Replace("CSR: ", "");
                         strEmaillist = strEmaillist.Replace("CARRIER: ", "");
                     }
                     else
                     {
-                        strEmaillist = strEmaillist + ";" + objContainerArrival.ListEamilDetail[i].email;
+                        strEmaillist = strEmaillist + ";" + objIBScanIn.ListEamilDetail[i].email;
                         strEmaillist = strEmaillist.Replace("CLIENT: ", "");
                         strEmaillist = strEmaillist.Replace("CSR: ", "");
                         strEmaillist = strEmaillist.Replace("CARRIER: ", "");
@@ -158,7 +165,7 @@ namespace GsEPWv8_4_MVC.Controllers
                 ViewBag.emailList = strEmaillist;
             }
             Mapper.CreateMap<InBoundScanHeader, InBoundScanHeaderModel>();
-            InBoundScanHeaderModel objContainerArrivalModel = Mapper.Map<InBoundScanHeader, InBoundScanHeaderModel>(objContainerArrival);
+            InBoundScanHeaderModel objContainerArrivalModel = Mapper.Map<InBoundScanHeader, InBoundScanHeaderModel>(objIBScanIn);
             if (objContainerArrivalModel != null)
             {
                 if (objContainerArrivalModel.ListGetContainerArrivalDetails.Count > 0)
@@ -249,6 +256,53 @@ namespace GsEPWv8_4_MVC.Controllers
             Mapper.CreateMap<Carrier, CarrierModel>();
             CarrierModel objCarrierModel = Mapper.Map<Carrier, CarrierModel>(objCarrier);
             return PartialView("_CarrierEntry", objCarrierModel);
+        }
+
+        public ActionResult LoadScanSerialDetails(string Id, string cmp_id, string Itm_Code, string Style, string Color, string Size, string itm_name, string ppk, string ctn, string TotalQty)
+        {
+            InboundInquiry objInboundInquiry = new InboundInquiry();
+            //InboundInquiryService ServiceObject = new InboundInquiryService();
+            //IContainerArrivalService ServiceObject = new ContainerArrivalServiceService();
+            IIBScanInService ServiceObject = new IBScanInService();
+
+            objInboundInquiry.CompID = cmp_id;
+            objInboundInquiry.ib_doc_id = Id;
+            objInboundInquiry.LineNum = 1;
+            objInboundInquiry = ServiceObject.GetInboundHdrDtl(objInboundInquiry);
+            objInboundInquiry.Container = (objInboundInquiry.ListAckRptDetails[0].Container == null || objInboundInquiry.ListAckRptDetails[0].Container == string.Empty ? string.Empty : objInboundInquiry.ListAckRptDetails[0].Container.Trim());
+            objInboundInquiry.status = (objInboundInquiry.ListAckRptDetails[0].status == null || objInboundInquiry.ListAckRptDetails[0].status == string.Empty ? string.Empty : objInboundInquiry.ListAckRptDetails[0].status.Trim());
+            objInboundInquiry.InboundRcvdDt = (objInboundInquiry.ListAckRptDetails[0].InboundRcvdDt == null || objInboundInquiry.ListAckRptDetails[0].InboundRcvdDt == string.Empty ? string.Empty : objInboundInquiry.ListAckRptDetails[0].InboundRcvdDt.Trim());
+            //objInboundInquiry.vend_id = objInboundInquiry.ListAckRptDetails[0].vend_id.Trim();
+
+            objInboundInquiry.vend_id = (objInboundInquiry.ListAckRptDetails[0].vend_id == null || objInboundInquiry.ListAckRptDetails[0].vend_id == string.Empty ? string.Empty : objInboundInquiry.ListAckRptDetails[0].vend_id.Trim());
+            objInboundInquiry.vend_name = (objInboundInquiry.ListAckRptDetails[0].vend_name == null || objInboundInquiry.ListAckRptDetails[0].vend_name == string.Empty ? string.Empty : objInboundInquiry.ListAckRptDetails[0].vend_name.Trim());
+            objInboundInquiry.FOB = (objInboundInquiry.ListAckRptDetails[0].FOB == null || objInboundInquiry.ListAckRptDetails[0].FOB == string.Empty ? string.Empty : objInboundInquiry.ListAckRptDetails[0].FOB.Trim());
+            objInboundInquiry.refno = (objInboundInquiry.ListAckRptDetails[0].refno == null || objInboundInquiry.ListAckRptDetails[0].refno == string.Empty ? string.Empty : objInboundInquiry.ListAckRptDetails[0].refno.Trim());
+
+            //objInboundInquiry.ibdocid = Id;
+            //objInboundInquiry = ServiceObject.GetDocEntryId(objInboundInquiry);
+            //objInboundInquiry.doc_entry_id = objInboundInquiry.doc_entry_id;
+            //objInboundInquiry.cmp_id = cmp_id;
+            //objInboundInquiry = ServiceObject.GetInboundDtl(objInboundInquiry);
+            objInboundInquiry.ItemScanIN = new ItemScanIN();
+            objInboundInquiry.ItemScanIN.cmp_id = cmp_id;
+            objInboundInquiry.ItemScanIN.ib_doc_id = Id;
+            objInboundInquiry.ItemScanIN.itm_code = Itm_Code;
+            objInboundInquiry.ItemScanIN.itm_num = Style;
+            objInboundInquiry.ItemScanIN.itm_color = Color;
+            objInboundInquiry.ItemScanIN.itm_size = Size;
+            objInboundInquiry.ItemScanIN.itm_name = itm_name;
+            objInboundInquiry.ItemScanIN.ppk = ppk;
+            objInboundInquiry.ItemScanIN.ctn = ctn;
+            objInboundInquiry.ItemScanIN.TotalQty = TotalQty;
+            objInboundInquiry.ItemScanIN.ib_doc_dt = null;
+            objInboundInquiry.ItemScanIN.ob_doc_dt = null;
+
+            //objInboundInquiry.ListItemScanIN = ServiceObject.getScanInDetailsByItemCode(cmp_id, Itm_Code, string.Empty);
+            // objInboundInquiry.ItemScanIN.balanceScan = Convert.ToInt32(objInboundInquiry.ItemScanIN.TotalQty) - objInboundInquiry.ListItemScanIN.Count();
+            Mapper.CreateMap<InboundInquiry, InboundInquiryModel>();
+            InboundInquiryModel InboundInquiryModel = Mapper.Map<InboundInquiry, InboundInquiryModel>(objInboundInquiry);
+            return PartialView("_ScanSerialDetails", InboundInquiryModel);
         }
         public ActionResult SaveContainerArrival(string p_str_cmp_id, string p_str_doc_id, string p_str_adj_dt, string p_str_carrier_id, string p_str_whs_id, string p_str_type, string p_str_cont_id, string p_str_event, string p_str_Notes, string p_str_emailList)
         {

@@ -47,6 +47,7 @@
     <Compile Include="Implementation\DashBoardService.cs" />
     <Compile Include="Implementation\EmailService.cs" />
     <Compile Include="Implementation\ForgotPasswordService.cs" />
+    <Compile Include="Implementation\IBScanInService.cs" />
     <Compile Include="Implementation\LoginService.cs" />
     <Compile Include="Implementation\LookUpService.cs" />
     <Compile Include="Implementation\MailConfigService.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Interface\IDashBoardService.cs" />
     <Compile Include="Interface\IEmailService.cs" />
     <Compile Include="Interface\IForgotPasswordService.cs" />
+    <Compile Include="Interface\IIBScanInService.cs" />
     <Compile Include="Interface\ILoginService.cs" />
     <Compile Include="Interface\ILookUpService.cs" />
     <Compile Include="Interface\IMailConfigService.cs" />
