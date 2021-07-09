@@ -17,5 +17,23 @@ namespace GsEPWv8_4_MVC.Business.Implementation
         {
             return ObjScanInRepository.GetInboundHdrDtl(objInboundInquiry);
         }
+
+        public List<ItemScanIN> getScanInDetailsByItemCode(string cmpId, string itm_code, string itm_serial_num)
+        {
+            return ObjScanInRepository.getScanInDetailsByItemCode(cmpId, itm_code, itm_serial_num);
+        }
+        public void DeleteScanInDetails(InboundInquiry objInboundInquiry)
+        {
+            ObjScanInRepository.DeleteScanInDetails(objInboundInquiry);
+        }
+        public void InsertScanInDetails(InboundInquiry objInboundInquiry)
+        {
+            ObjScanInRepository.InsertScanInDetails(objInboundInquiry);
+        }
+
+        public void EditScanInDetails(InboundInquiry objInboundInquiry)
+        {
+            ObjScanInRepository.EditScanInDetails(objInboundInquiry);
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace GsEPWv8_4_MVC.Data.Interface
         List<ItemScanIN> getScanInDetailsByItemCode(string cmpId, string itm_code, string itm_serial_num);
         void DeleteScanInDetails(InboundInquiry objInboundInquiry);
         void EditScanInDetails(InboundInquiry objInboundInquiry);
+        void InsertScanInDetails(InboundInquiry objInboundInquiry);
     }
 }

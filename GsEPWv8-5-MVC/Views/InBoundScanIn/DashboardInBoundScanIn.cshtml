@@ -198,10 +198,10 @@
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <div id='CarrierAdd' class='modal' style="padding-top:73px;padding-left:50px">
+    <div id='SerialAdd' class='modal' style="padding-top:73px;padding-left:50px">
         <div class="modal-dialog">
-            <div class="modal-content" style="width: 1140px;height: 655px;" >
-                <div id='CarrierContent' style="width: 1140px;height: 655px;"></div>
+            <div class="modal-content" style="width: 441px;height: 655px;" >
+                <div id='SerialContent' style="width: 441px;height: 655px;"></div>
             </div>
         </div>
     </div>
@@ -467,9 +467,9 @@
                 datatype: "json",
                 success: function (data) {
                     $("#ajaxLoading").hide();
-                    $('#CarrierContent').html(data);
-                    $('#CarrierAdd').modal(options);
-                    $('#CarrierAdd').modal('show');
+                    $('#SerialContent').html(data);
+                    $('#SerialAdd').modal(options);
+                    $('#SerialAdd').modal('show');
                 },
                 error: function () {
                     alert("Dynamic content load failed.");

@@ -2,35 +2,7 @@
 @{
     var Ordercount = Model.ListAckRptDetails.Count;
     @Html.HiddenFor(model => model.cmp_id);
-    //// int TotalQty = 0;
-    // int Totalctn = 0;
-    // decimal l_dec_tot_cube = 0;
-    // decimal l_dec_tot_wgt = 0;
 }
-@*@for (int j = 0; j < Model.ListAckRptDetails.Count(); j++)
-    {
-        var qty = (Model.ListAckRptDetails[j].TotalQty);
-        if (qty > 0)
-        {
-            TotalQty = TotalQty + qty;
-        }
-        var ctn = (Model.ListAckRptDetails[j].ctn);
-        if (ctn > 0)
-        {
-            Totalctn = Totalctn + ctn;
-        }
-        var l_dec_cube = (Model.ListAckRptDetails[j].CUBE);
-        if (l_dec_cube > 0)
-        {
-            l_dec_tot_cube = l_dec_tot_cube + (ctn * l_dec_cube);
-        }
-        var l_dec_wgt = (Model.ListAckRptDetails[j].wgt);
-        if (l_dec_wgt > 0)
-        {
-            l_dec_tot_wgt = l_dec_tot_wgt + (ctn * l_dec_wgt);
-        }
-
-    }*@
 <style type="text/css">
     div#table-Details {
         border: 1px solid #999;
@@ -71,217 +43,158 @@
     @Html.HiddenFor(model => model.ItemScanIN.ctn)
     @Html.HiddenFor(model => model.ItemScanIN.TotalQty)
 
-    @*objInboundInquiry.ItemScanIN.itm_name = itm_name;
-        objInboundInquiry.ItemScanIN.ppk = ppk;
-        objInboundInquiry.ItemScanIN.ctn = ctn;
-        objInboundInquiry.ItemScanIN.TotalQty = TotalQty;*@
-
     <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">Item Scan IN</h4>
         <button type="button" style="margin-left: 88%; margin-top: -1%;" id="btnClose" class="btn-Close" data-dismiss="modal">Close</button>
-        @*<button type = "button" id="btnSaveScanSerial" class="btn-Close" style="float:right;margin-top: -18px;margin-right: 2px;background-color: #00c0ef;">Save</button>*@
     </div>
     <center><label style="font-size:20px;"><b> Item Scan IN</b></label></center>
     <hr />
-    @*<div id = "ajaxLoadingScanSerialDetails" style= "display:none;" >< img src= "~/Images/ajax-loader.gif" /></ div >*@
 
     <div id="ajaxLoadingScanSerialDetails" style="display:none;"><img src="~/Images/ajax-loader.gif" /></div>
 
     <div class="box-body">
         <div class="box-header">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-9 col-sm-9 col-xs-9" style="bottom: -24px;">
+            <div class="col-xs-12">
+                <div class="col-xs-12" style="bottom: -24px;">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="col-xs-1" style="text-align: right; margin-top: 6px; font-size:10px;">
-                                <label><b class="Lblmanual">Cmp Id</b></label>
-                            </div>
-                            <div class="col-xs-2" style="text-align: right;font-size:10px;margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.CompID, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50" })
-                            </div>
-                            <div class="col-xs-1" style="text-align: right;  margin-top: 6px;font-size:10px;">
-                                <label><b class="Lblmanual">IBDocID</b></label>
-                            </div>
-                            <div class="col-xs-2" style="text-align: right;font-size:10px;margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.ibdocid, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50" })
-                            </div>
-                            <div class="col-xs-1" style="text-align: right; margin-top: 6px;font-size:10px;">
-                                <label><b class="Lblmanual">ContainerID</b></label>
+                        <div class="col-xs-2" style="text-align: right; margin-top: 6px; font-size:10px;">
+                            <label><b class="Lblmanual">Cmp Id</b></label>
+                        </div>
+                        <div class="col-xs-4" style="text-align: right;font-size:10px;margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.cmp_id, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50" })
+                        </div>
+                        <div class="col-xs-2" style="text-align: right;  margin-top: 6px;font-size:10px;">
+                            <label><b class="Lblmanual">IBDocID</b></label>
+                        </div>
+                        <div class="col-xs-4" style="text-align: right;font-size:10px;margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.ib_doc_id, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50" })
+                        </div>
 
-                            </div>
-                            <div class="col-xs-2" style="margin-left:-17px;">
-                                @Html.TextBoxFor(model => model.Container, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50" })
-                            </div>
+                    </div>
+                    <br />
 
-                            <div class="col-xs-1" style="text-align: right;  margin-top: 6px;font-size:10px;">
-                                <label><b class="Lblmanual">Load date</b></label>
-                            </div>
-                            <div class="col-xs-2" style="text-align: right;font-size:10px;margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.ib_load_dt, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "10" })
-                            </div>
 
+                    <div class="row">
+
+                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+                            <label><b class="Lblmanual">Style</b></label>
+                        </div>
+                        <div class="col-xs-4" style="margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_num, new { @id = "itm_num", @readonly = true, @class = "form-control txtlbl", @maxlength = "50", })
+                        </div>
+                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+                            <label><b class="Lblmanual">Color</b></label>
+                        </div>
+                        <div class="col-xs-4" style="margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_color, new { @id = "itm_color", @readonly = true, @class = "form-control txtlbl", @maxlength = "50", })
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+                            <label><b class="Lblmanual">Size</b></label>
+                        </div>
+                        <div class="col-xs-4" style="margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_size, new { @id = "itm_size", @readonly = true, @class = "form-control txtlbl", @maxlength = "50" })
+                        </div>
+                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+                            <label><b class="Lblmanual">Item Code</b></label>
+                        </div>
+                        <div class="col-xs-4" style="margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.itm_code, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50", })
                         </div>
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="col-xs-1" style="text-align:right;margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">Status</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.status, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50", @id = "Statuspar" })
 
-                            </div>
-                            <div class="col-xs-1" style="text-align:right;margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">VenderName</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -15px;">
-                                @Html.TextBoxFor(model => model.vend_name, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50", })
-                            </div>
-
-                            <div class="col-xs-1" style="text-align:right; margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">Ref No</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -15px;">
-                                @Html.TextBoxFor(model => model.refno, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50", })
-
-                            </div>
-                            <div class="col-xs-1" style="text-align:right; margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">Item Code</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -15px;">
-                                @Html.TextBoxFor(model => model.itm_code, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50", })
-
-                            </div>
+                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+                            <label><b class="Lblmanual"> Scan In</b></label>
                         </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-xs-12">
-
-                            <div class="col-xs-1" style="text-align:right; margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">Style</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.ItemScanIN.itm_num, new { @id = "itm_num", @readonly = true, @class = "form-control txtlbl", @maxlength = "50", })
-                            </div>
-                            <div class="col-xs-1" style="text-align:right; margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">Color</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.ItemScanIN.itm_color, new { @id = "itm_color", @readonly = true, @class = "form-control txtlbl", @maxlength = "50", })
-                            </div>
-                            <div class="col-xs-1" style="text-align:right; margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">Size</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.ItemScanIN.itm_size, new { @id = "itm_size", @readonly = true, @class = "form-control txtlbl", @maxlength = "50" })
-                            </div>
-                            <div class="col-xs-1" style="text-align:right; margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual">Item Name</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.ItemScanIN.itm_name, new { @id = "itm_name", @readonly = true, @class = "form-control txtlbl", @maxlength = "50" })
-                            </div>
+                        <div class="col-xs-4" style="margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_serial_num, new { @id = "itm_serial_num", @class = "form-control txtlbl", @maxlength = "50", @onkeypress = "keypresshandle(event);" })
+                            @Html.HiddenFor(model => model.ItemScanIN.itm_serial_num_exist)
+                            <input style="display:none;" id="itm_serial_num_exist" name="itm_serial_num_exist" value="" />
                         </div>
+
+                        <div class="col-xs-4" style="text-align:right; margin-top:15px;font-size:10px;">
+                            <button type="button" id="btnSaveScanSerial" class="btn-Close" style="float:right;margin-top: -18px;margin-right: 2px;background-color: #00c0ef;">Include</button>
+                        </div>
+
+
+                        </>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-12">
-
-                            <div class="col-xs-1" style="text-align:right; margin-top:6px;font-size:10px;">
-                                <label><b class="Lblmanual"> Scan In</b></label>
-                            </div>
-                            <div class="col-xs-2" style="margin-left: -1%;">
-                                @Html.TextBoxFor(model => model.ItemScanIN.itm_serial_num, new { @id = "itm_serial_num", @class = "form-control txtlbl", @maxlength = "50", @onkeypress = "keypresshandle(event);" })
-                                @Html.HiddenFor(model => model.ItemScanIN.itm_serial_num_exist)
-                                <input style="display:none;" id="itm_serial_num_exist" name="itm_serial_num_exist" value="" />
-                            </div>
-
-                            <div class="col-xs-1" style="text-align:right; margin-top:15px;font-size:10px;">
-                                <button type="button" id="btnSaveScanSerial" class="btn-Close" style="float:right;margin-top: -18px;margin-right: 2px;background-color: #00c0ef;">Include</button>
-                            </div>
-
-
-                        </div>
-                    </div>
                 </div>
-
             </div>
         </div>
-    </div>
-    <br />
-    <br />
-    <fieldset style="width:100%">
-        <legend style="text-align:left;color:orange;margin-bottom:10px;">Total Summary</legend><hr style="margin-bottom:0px;" />
+        <br />
+        <br />
+        <fieldset style="width:100%">
+            @*<legend style="text-align:left;color:orange;margin-bottom:10px;">Total Summary</legend><hr style="margin-bottom:0px;" />*@
 
-        <div class="row">
-            <div class="col-xs-12">
-                <span id="LegendInformation" class="totalCount"
-                      @*style="text-align: left;
-    color: red;
-    margin-bottom: 10px;
-    font-size: 20px;"*@></span>
+            <div class="row">
+                <div class="col-xs-12">
+                    <span id="LegendInformation" class="totalCount"></span>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                @*<div class="col-xs-2" style="margin-left:3%; margin-top:1%">
-                        <span style="font-size: 1.5em;color:#ff5600;font-weight: bold;text-align:right;">
-                            Records:
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
+                        <span style="font-size: 1.5em;color:#ff5600;">
+                            Qty:
                         </span>
                     </div>
-                    <div class="col-xs-2" style="margin-left:-13%;margin-top:1%">
+                    <div class="col-xs-3" style="margin-left:-13%;margin-top:1%">
                         <label class="totalCount" style="text-align:left">
-                            @Model.ItemScanIN.
+                            @Model.ItemScanIN.ctn
                         </label>
-                    </div>*@
-                <div class="col-xs-2" style="margin-left:-5%; margin-top:1%">
-                    <span style="font-size: 1.5em;color:#ff5600;font-weight: bold;text-align:right;">
-                        Qty:
-                    </span>
-                </div>
-                <div class="col-xs-2" style="margin-left:-13%;margin-top:1%">
-                    <label class="totalCount" style="text-align:left">
-                        @Model.ItemScanIN.ctn
-                    </label>
-                </div>
-                <div class="col-xs-2" style="margin-left:-5%; margin-top:1%">
-                    <span style="font-size: 1.5em;color:#ff5600;font-weight: bold;text-align:right;padding-left:53px">
-                        Total Ctns:
-                    </span>
-                </div>
-                <div class="col-xs-2" style="margin-left:-10%;margin-top:1%">
-                    <label class="totalCount" style="text-align:left">
-                        @Model.ItemScanIN.TotalQty
-                    </label>
-                </div>
-                <div class="col-xs-2" style="margin-left:-5%; margin-top:1%">
-                    <span style="font-size: 1.5em;color:#ff5600;font-weight: bold;text-align:right;padding-left:53px">
-                        Scan In Cpunt:
-                    </span>
-                </div>
-                <div class="col-xs-2" style="margin-left:-10%;margin-top:1%">
-                    <label class="totalCount" style="text-align:left">
-                        @Model.ListItemScanIN.Count
-                    </label>
-                </div>
-                <div class="col-xs-2" style="margin-left:-5%; margin-top:1%">
-                    <span style="font-size: 1.5em;color:#ff5600;font-weight: bold;text-align:right;padding-left:53px">
-                        Scan In Remaining:
-                    </span>
-                </div>
-                <div class="col-xs-2" style="margin-left:-2%;margin-top:1%">
-                    <label class="totalCount" style="text-align:left">
-                        @Model.ItemScanIN.balanceScan
-                    </label>
-                </div>
+                    </div>
+                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
+                        <span style="font-size: 1.5em;color:#ff5600;">
+                            Total Ctns:
+                        </span>
+                    </div>
+                    <div class="col-xs-3" style="margin-left:-10%;margin-top:1%">
+                        <label class="totalCount" style="text-align:left">
+                            @Model.ItemScanIN.TotalQty
+                        </label>
+                    </div>
+                    
 
+                </div>
             </div>
-        </div>
-    </fieldset>
+            <div class="row">
+                <div class="col-xs-12">
 
-    <br />
+                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
+                        <span style="font-size: 1.5em;color:#ff5600;">
+                            Scan In Count:
+                        </span>
+                    </div>
+                    <div class="col-xs-3" style="margin-left:-10%;margin-top:1%">
+                        <label class="totalCount" style="text-align:left">
+                            @Model.ListItemScanIN.Count
+                        </label>
+                    </div>
+                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
+                        <span style="font-size: 1.5em;color:#ff5600;">
+                            Scan In Remaining:
+                        </span>
+                    </div>
+                    <div class="col-xs-3" style="margin-left:-2%;margin-top:1%">
+                        <label class="totalCount" style="text-align:left">
+                            @Model.ItemScanIN.balanceScan
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+
+        <br />
+    </div>
 </center>
 
 
@@ -378,7 +291,8 @@
             var cmp_id = $("#cmp_id").val();
             var $buttonClicked = $(this);
             var $buttonClicked = $(this);
-            var id = $("#ibdocid").val();
+            var id = $("#ItemScanIN_ib_doc_id").val();
+            var ibdocid = $("#ItemScanIN_ib_doc_id").val();
             var data = $buttonClicked.attr('data-id');
             var data1 = $buttonClicked.attr('data-id1');
             var data2 = $buttonClicked.attr('data-id2');
@@ -394,8 +308,6 @@
             //alert(data3);
             //alert(data4); alert(data5); alert(data6); alert(data7); alert(data8);
             var options = { "backdrop": "static", keyboard: true };
-            alert(cmp_id);
-            alert(id);
             $("#ajaxLoading").show();
             $.ajax({
                 type: "GET",
@@ -405,9 +317,9 @@
                 datatype: "json",
                 success: function (data) {
                     $("#ajaxLoading").hide();
-                    $('#myModalContent').html(data);
-                    $('#myModal').modal(options);
-                    $('#myModal').modal('show');
+                    $('#SerialContent').html(data);
+                    $('#SerialAdd').modal(options);
+                    $('#SerialAdd').modal('show');
                 },
                 error: function () {
                     $("#ajaxLoading").hide();         //CR_3PL_MVC_IB_2018_0228_002 Added By Meera 28-02-2018
@@ -447,7 +359,7 @@
             var itm_serial_num_TobeDelete = $buttonClicked.attr('data-itm_serial_num');
             $("#ajaxLoadingScanSerialDetails").show();
 
-            var ScanDeleteURL = '/ItemCodeScanSerial/DeleteScanInDetails';
+            var ScanDeleteURL = '/InBoundScanIn/DeleteScanInDetails';
 
             $.ajax({
                 type: "GET",
@@ -457,13 +369,12 @@
                 datatype: "json",
                 success: function (data) {
                     // debugger;
-                    var TeamDetailPostBackURL = '/ItemCodeScanSerial/LoadScanSerialDetails';
+                    var TeamDetailPostBackURL = '/InBoundScanIn/LoadScanSerialDetails';
                     var cmp_id = $("#cmp_id").val();
                     var $buttonClicked = $(this);
                     var $buttonClicked = $(this);
-                    var id = $("#ibdocid").val();
-
-                    var ibdocid = $("#ibdocid").val();
+                    var id = $("#ItemScanIN_ib_doc_id").val();
+                    var ibdocid = $("#ItemScanIN_ib_doc_id").val();
                     var Itm_Code = $("#Itm_Code").val();
                     var itm_num = $("#itm_num").val();
                     var itm_color = $("#itm_color").val();
@@ -484,9 +395,9 @@
                         datatype: "json",
                         success: function (data) {
                             $("#ajaxLoading").hide();
-                            $('#myModalContent').html(data);
-                            $('#myModal').modal(options);
-                            $('#myModal').modal('show');
+                            $('#SerialContent').html(data);
+                            $('#SerialAdd').modal(options);
+                            $('#SerialAdd').modal('show');
                             $("#itm_serial_num").focus();
                             //$("#LegendInformation").value = "ok";
                             //$("#LegendInformation").innerHtml = "ok";
@@ -540,15 +451,19 @@
         var cmp_id = $("#cmp_id").val();
         var $buttonClicked = $(this);
         var $buttonClicked = $(this);
-        var id = $("#ibdocid").val();
+        var id = $("#ItemScanIN_ib_doc_id").val();
+        //alert(id);
+        var ibdocid = $("#ItemScanIN_ib_doc_id").val();
 
 
         var cmp_id = $("#cmp_id").val();
         //var $buttonClicked = $(this);
         //var $buttonClicked = $(this);
-        var id = $("#ibdocid").val();
-
-        var ibdocid = $("#ibdocid").val();
+        //var id = $("#ibdocid").val();
+        var id = $("#ItemScanIN_ib_doc_id").val();
+        //alert(id);
+        var ibdocid = $("#ItemScanIN_ib_doc_id").val();
+        // var ibdocid = $("#ibdocid").val();
         var Itm_Code = $("#Itm_Code").val();
         var itm_num = $("#itm_num").val();
         var itm_color = $("#itm_color").val();
@@ -572,7 +487,7 @@
 
         $("#ajaxLoadingScanSerialDetails").show();
         var itm_serial_num_Addedd = itm_serial_num;
-        var ScanPostBackURL = '/ItemCodeScanSerial/SaveScanInDetails';
+        var ScanPostBackURL = '/InBoundScanIn/SaveScanInDetails';
         $.ajax({
             type: "GET",
             url: ScanPostBackURL,
@@ -605,13 +520,13 @@
                     //     $("#itm_serial_num").focus();
                     // });
                     // itm_serial_num_Addedd = itm_serial_num;
-                    var TeamDetailPostBackURL = '/ItemCodeScanSerial/LoadScanSerialDetails';
+                    var TeamDetailPostBackURL = '/InBoundScanIn/LoadScanSerialDetails';
                     var cmp_id = $("#cmp_id").val();
                     var $buttonClicked = $(this);
                     var $buttonClicked = $(this);
-                    var id = $("#ibdocid").val();
-
-                    var ibdocid = $("#ibdocid").val();
+                    var id = $("#ItemScanIN_ib_doc_id").val();
+                    //alert(id);
+                    var ibdocid = $("#ItemScanIN_ib_doc_id").val();
                     var Itm_Code = $("#Itm_Code").val();
                     var itm_num = $("#itm_num").val();
                     var itm_color = $("#itm_color").val();
@@ -631,9 +546,12 @@
                         datatype: "json",
                         success: function (data) {
                             $("#ajaxLoading").hide();
-                            $('#myModalContent').html(data);
-                            $('#myModal').modal(options);
-                            $('#myModal').modal('show');
+                            $('#SerialContent').html(data);
+                            $('#SerialAdd').modal(options);
+                            $('#SerialAdd').modal('show');
+                            //$('#myModalContent').html(data);
+                            //$('#myModal').modal(options);
+                            //$('#myModal').modal('show');
                             $("#itm_serial_num").focus();
                             $("#LegendInformation").html(itm_serial_num_Addedd + " Serial Code Added ");
                         },
@@ -670,13 +588,13 @@
 
     function LoadScanDetails() {
         debugger;
-        var TeamDetailPostBackURL = '/ItemCodeScanSerial/LoadScanSerialDetails';
+        var TeamDetailPostBackURL = '/InBoundScanIn/LoadScanSerialDetails';
         var cmp_id = $("#cmp_id").val();
         var $buttonClicked = $(this);
         var $buttonClicked = $(this);
-        var id = $("#ibdocid").val();
-
-        var ibdocid = $("#ibdocid").val();
+        var id = $("#ItemScanIN_ib_doc_id").val();
+        //alert(id);
+        var ibdocid = $("#ItemScanIN_ib_doc_id").val();
         var Itm_Code = $("#Itm_Code").val();
         var itm_num = $("#itm_num").val();
         var itm_color = $("#itm_color").val();
@@ -724,9 +642,12 @@
             success: function (data) {
 
                 $("#ajaxLoading").hide();
-                $('#myModalContent').html(data);
-                $('#myModal').modal(options);
-                $('#myModal').modal('show');
+                $('#SerialContent').html(data);
+                $('#SerialAdd').modal(options);
+                $('#SerialAdd').modal('show');
+                //$('#myModalContent').html(data);
+                //$('#myModal').modal(options);
+                //$('#myModal').modal('show');
                 $("#itm_serial_num").focus();
                 $("#LegendInformation").html(itm_serial_num_Addedd + " Serial Code Added ");
             },

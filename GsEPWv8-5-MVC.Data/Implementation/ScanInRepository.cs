@@ -203,5 +203,31 @@ namespace GsEPWv8_4_MVC.Data.Implementation
             }
         }
 
+        public void InsertScanInDetails(InboundInquiry objInboundInquiry)
+        {
+            using (IDbConnection connection = ConnectionManager.OpenConnection())
+            {
+                const string storedProcedure1 = "sp_add_itm_scan_serial_hdr";
+                connection.Execute(storedProcedure1,
+                    new
+                    {
+                        @cmp_id = objInboundInquiry.ItemScanIN.cmp_id,
+
+                        @itm_code = objInboundInquiry.ItemScanIN.itm_code,
+                        @itm_serial_num = objInboundInquiry.ItemScanIN.itm_serial_num,
+                        @itm_num = objInboundInquiry.ItemScanIN.itm_num,
+                        @itm_color = objInboundInquiry.ItemScanIN.itm_color,
+                        @itm_size = objInboundInquiry.ItemScanIN.itm_size,
+                        @status = objInboundInquiry.ItemScanIN.status,
+                        @ib_doc_id = objInboundInquiry.ItemScanIN.ib_doc_id,
+                        @ib_doc_dt = objInboundInquiry.ItemScanIN.ib_doc_dt,
+                        @ob_doc_id = objInboundInquiry.ItemScanIN.ob_doc_id,
+                        @ob_doc_dt = objInboundInquiry.ItemScanIN.ob_doc_dt,
+                        @ib_user = objInboundInquiry.ItemScanIN.ib_user ?? "",
+                        @ob_user = objInboundInquiry.ItemScanIN.ob_user ?? ""
+                    }, commandType: CommandType.StoredProcedure);
+
+            }
+        }
     }
 }
