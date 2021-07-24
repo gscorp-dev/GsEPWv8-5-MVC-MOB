@@ -17,53 +17,106 @@
 <input type="hidden" value="@ViewBag.emailList" id="l_str_emailList" />
 
 <center>
+    <div class="box-body" style="margin-left:2px; width:366px;">
+        <div class="box-header">
+            @*<div class="col-xs-12">*@
 
-    <table id="InbndRcvdDtl" class="table table-bordered table-striped" style="border:1px solid #121213 ;">
-        <thead class="grid_backcolor">
-            <tr>
-                <th class="grid_header_backcolor" style="font-size:11px;width:8%;">ItemCode</th>
-                <th class="grid_header_backcolor" style="font-size:11px;width:8%;">Style</th>
-                <th class="grid_header_backcolor" style="font-size:11px;width:8%;">Color</th>
-                <th class="grid_header_backcolor" style="font-size:11px;width:7%;">Size</th>
-                <th class="grid_header_backcolor" style="font-size:11px;width:5%;">ppk</th>
-                <th class="grid_header_backcolor" style="font-size:11px;width:5%;">Ctn</th>
-                <th class="grid_header_backcolor" style="font-size:11px;width:6%;">TotQty</th>
-            </tr>
-        </thead>
-        <tbody style="background-color:rgba(0, 0, 0, 0.12);">
+            <div class="box">
+                <div class="box box-default box-header" style="border:none">
+                    <div id="Itemgrid">
+
+                        <div id="hdrgridItemMove">
+                            <div class="col-sm-12">
+                                <table id="GridItemMove" class="table table-bordered table-striped table-responsive">
+                                    <thead class="tbl-header grid_backcolor">
+                                        <tr>
+                                            <th class="grid_header_backcolor Item_Move_tblheader" style="width:3%">
+                                                ItemCode
+                                            </th>
+                                            <th class="grid_header_backcolor Item_Move_tblheader" style="width:4%;">
+                                                Style
+                                            </th>
+                                            <th class="grid_header_backcolor Item_Move_tblheader" style="width:2%;">
+                                                Color
+                                            </th>
+                                            <th class="grid_header_backcolor Item_Move_tblheader" style="width:2%;">
+                                                Size
+                                            </th>
+                                            @*<th class="grid_header_backcolor Item_Move_tblheader" style="width:2%;">
+                                                PPK
+                                            </th>
+
+                                            <th class="grid_header_backcolor Item_Move_tblheader" style="width:2%;">
+                                                AvlCtn
+                                            </th>*@
+                                            <th class="grid_header_backcolor Item_Move_tblheader" style="width:2%;">
+                                                TotQty
+                                            </th>
+                                            @*<th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>
+                                            <th style="display:none;"></th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbl-content" style="background-color:rgba(0, 0, 0, 0.12);">
+                                        @for (int i = 0; i < Model.InboundInquiry.ListAckRptDetails.Count; i++)
+                                        {
+                                            int line = i + 1;
+                                            var obj = @Model.InboundInquiry.ListAckRptDetails[i];
+                                            <tr id="GridID_@line" style="background-color:white;">
+                                                <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :center; width:4%">
+                                                    @*@Model.InboundInquiry.ListAckRptDetails[i].Itm_Code*@
+                                                    <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline;color:blue;"
+                                                       dCmpID="@obj.cmp_id"
+                                                       dDocID="@obj.ib_doc_id"
+                                                       dItm_Code="@obj.Itm_Code"
+                                                       dStyle="@obj.Style"
+                                                       dColor="@obj.Color"
+                                                       dSize="@obj.Size"
+                                                       dItemName="@obj.itm_name"
+                                                       dppk="@obj.ppk"
+                                                       dColor1="@obj.Color"
+                                                       dCtn="@obj.ctn"
+                                                       dTotalQty="@obj.TotalQty" class="AddNewCarrierMethod">
+                                                        <span class="glyphicon glyphicon-plus" style="font-size: 20px;"></span><b></b>
+                                                    </a>
+                                                </td>
+
+                                                <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:4%">@Model.InboundInquiry.ListAckRptDetails[i].Style</td>
+                                                <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:2%">@Model.InboundInquiry.ListAckRptDetails[i].Color</td>
+                                                <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:2%">@Model.InboundInquiry.ListAckRptDetails[i].Size</td>
+                                                @*<td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left;  width:2%">@Model.InboundInquiry.ListAckRptDetails[i].ppk</td>
+                                                <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left;  width:2%">@Model.InboundInquiry.ListAckRptDetails[i].ctn</td>*@
+                                                <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left;  width:2%">@Model.InboundInquiry.ListAckRptDetails[i].TotalQty</td>
+                                            </tr>
+                                        }
 
 
-            @for (int i = 0; i < Model.InboundInquiry.ListAckRptDetails.Count; i++)
-            {
-                int line = i + 1;
-                var obj = @Model.InboundInquiry.ListAckRptDetails[i];
-                <tr>
-                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Itm_Code
-                        <a href="javascript:void(0);" style="font-size:15px; text-decoration:underline;color:blue;"  
-                           dCmpID="@obj.cmp_id" 
-                           dDocID="@obj.ib_doc_id"
-                           dItm_Code="@obj.Itm_Code"
-                       dStyle="@obj.Style"
-                       dColor="@obj.Color"
-                       dSize="@obj.Size"
-                       dItemName="@obj.itm_name"
-                       dppk="@obj.ppk"
-                       dColor1="@obj.Color"
-                       dCtn="@obj.ctn"
-                       dTotalQty="@obj.TotalQty"  class="AddNewCarrierMethod">
-                        <span class="glyphicon glyphicon-plus" style="font-size: 20px;"></span><b></b></a>
-                    </td>
-                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Style</td>
-                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Color</td>
-                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].Size</td>
-                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].ppk</td>
-                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].ctn</td>
-                    <td style="text-align:left;font-size:11px;font-weight:bold;">@Model.InboundInquiry.ListAckRptDetails[i].TotalQty</td>
-                </tr>
-            }
-
-        </tbody>
-    </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*</div>*@
+        </div>
+    </div>
 </center>
 <script>
     $(document).ready(function () {

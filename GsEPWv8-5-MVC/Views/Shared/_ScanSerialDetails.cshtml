@@ -44,10 +44,10 @@
     @Html.HiddenFor(model => model.ItemScanIN.TotalQty)
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Item Scan IN</h4>
-        <button type="button" style="margin-left: 88%; margin-top: -1%;" id="btnClose" class="btn-Close" data-dismiss="modal">Close</button>
+        <h4 class="modal-title" id="myModalLabel" style="color:white;">Item Scan IN</h4>
+        <button type="button" style="margin-left: 83%; margin-top: -4%;" id="btnClose" class="btn-Close" data-dismiss="modal">Close</button>
     </div>
-    <center><label style="font-size:20px;"><b> Item Scan IN</b></label></center>
+    @*<center><label style="font-size:20px;"><b> Item Scan IN</b></label></center>*@
     <hr />
 
     <div id="ajaxLoadingScanSerialDetails" style="display:none;"><img src="~/Images/ajax-loader.gif" /></div>
@@ -55,19 +55,19 @@
     <div class="box-body">
         <div class="box-header">
             <div class="col-xs-12">
-                <div class="col-xs-12" style="bottom: -24px;">
+                <div class="col-xs-12">
                     <div class="row">
-                        <div class="col-xs-2" style="text-align: right; margin-top: 6px; font-size:10px;">
-                            <label><b class="Lblmanual">Cmp Id</b></label>
+                        <div class="col-xs-3" style="text-align: left; margin-top: 6px; font-size:10px;">
+                            <label><b class="Lblmanual">CmpId</b></label>
                         </div>
-                        <div class="col-xs-4" style="text-align: right;font-size:10px;margin-left: -1%;">
-                            @Html.TextBoxFor(model => model.ItemScanIN.cmp_id, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50" })
+                        <div class="col-xs-3" style="text-align: left;font-size:10px;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.cmp_id, new { @class = "form-control ", @readonly = true, @maxlength = "50" })
                         </div>
-                        <div class="col-xs-2" style="text-align: right;  margin-top: 6px;font-size:10px;">
+                        <div class="col-xs-3" style="text-align: left;  margin-top: 6px;font-size:10px;">
                             <label><b class="Lblmanual">IBDocID</b></label>
                         </div>
-                        <div class="col-xs-4" style="text-align: right;font-size:10px;margin-left: -1%;">
-                            @Html.TextBoxFor(model => model.ItemScanIN.ib_doc_id, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50" })
+                        <div class="col-xs-3" style="text-align: left;font-size:10px;">
+                            @Html.TextBoxFor(model => model.ItemScanIN.ib_doc_id, new { @class = "form-control ", @readonly = true, @maxlength = "50" })
                         </div>
 
                     </div>
@@ -76,49 +76,47 @@
 
                     <div class="row">
 
-                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
-                            <label><b class="Lblmanual">Style</b></label>
+                        @*<div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+            <label><b class="Lblmanual">Style</b></label>
+        </div>*@
+                        <div class="col-xs-4">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_num, new { @id = "itm_num", @readonly = true, @class = "form-control ", @maxlength = "100", })
                         </div>
-                        <div class="col-xs-4" style="margin-left: -1%;">
-                            @Html.TextBoxFor(model => model.ItemScanIN.itm_num, new { @id = "itm_num", @readonly = true, @class = "form-control txtlbl", @maxlength = "50", })
+                        @*<div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+            <label><b class="Lblmanual">Color</b></label>
+        </div>*@
+                        <div class="col-xs-4">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_color, new { @id = "itm_color", @readonly = true, @class = "form-control ", @maxlength = "50", })
                         </div>
-                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
-                            <label><b class="Lblmanual">Color</b></label>
-                        </div>
-                        <div class="col-xs-4" style="margin-left: -1%;">
-                            @Html.TextBoxFor(model => model.ItemScanIN.itm_color, new { @id = "itm_color", @readonly = true, @class = "form-control txtlbl", @maxlength = "50", })
+                        <div class="col-xs-4">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_size, new { @id = "itm_size", @readonly = true, @class = "form-control ", @maxlength = "50" })
                         </div>
 
                     </div>
                     <br />
-                    <div class="row">
-                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
-                            <label><b class="Lblmanual">Size</b></label>
-                        </div>
-                        <div class="col-xs-4" style="margin-left: -1%;">
-                            @Html.TextBoxFor(model => model.ItemScanIN.itm_size, new { @id = "itm_size", @readonly = true, @class = "form-control txtlbl", @maxlength = "50" })
-                        </div>
-                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
+                    <div class="row" style="display:none;">
+                      
+                        <div class="col-xs-3" style="text-align:right; margin-top:6px;font-size:10px;">
                             <label><b class="Lblmanual">Item Code</b></label>
                         </div>
-                        <div class="col-xs-4" style="margin-left: -1%;">
-                            @Html.TextBoxFor(model => model.itm_code, new { @class = "form-control txtlbl", @readonly = true, @maxlength = "50", })
+                        <div class="col-xs-3" style="margin-left: -1%;">
+                            @Html.TextBoxFor(model => model.itm_code, new { @class = "form-control ", @readonly = true, @maxlength = "50", })
                         </div>
                     </div>
                     <br />
                     <div class="row">
 
-                        <div class="col-xs-2" style="text-align:right; margin-top:6px;font-size:10px;">
-                            <label><b class="Lblmanual"> Scan In</b></label>
+                        <div class="col-xs-3" style="text-align:left; margin-top:6px;font-size:10px;">
+                            <label><b class="Lblmanual"> ScanIn</b></label>
                         </div>
-                        <div class="col-xs-4" style="margin-left: -1%;">
-                            @Html.TextBoxFor(model => model.ItemScanIN.itm_serial_num, new { @id = "itm_serial_num", @class = "form-control txtlbl", @maxlength = "50", @onkeypress = "keypresshandle(event);" })
+                        <div class="col-xs-5">
+                            @Html.TextBoxFor(model => model.ItemScanIN.itm_serial_num, new { @id = "itm_serial_num", @class = "form-control ", @maxlength = "50", @onkeypress = "keypresshandle(event);" })
                             @Html.HiddenFor(model => model.ItemScanIN.itm_serial_num_exist)
                             <input style="display:none;" id="itm_serial_num_exist" name="itm_serial_num_exist" value="" />
                         </div>
 
-                        <div class="col-xs-4" style="text-align:right; margin-top:15px;font-size:10px;">
-                            <button type="button" id="btnSaveScanSerial" class="btn-Close" style="float:right;margin-top: -18px;margin-right: 2px;background-color: #00c0ef;">Include</button>
+                        <div class="col-xs-4" style="text-align:left; margin-top:15px;font-size:10px;">
+                            <button type="button" id="btnSaveScanSerial" class="btn-Close" style="float:right;margin-top: -18px;margin-right: 53px;background-color: #00c0ef;">Include</button>
                         </div>
 
 
@@ -130,6 +128,127 @@
         </div>
         <br />
         <br />
+        @*<div class="box">
+            <div class="box box-default box-header" style="border:none">
+                <div id="Itemgrid">
+                   
+                    <div id="hdrgridItemMove">
+                        <div class="col-sm-12">
+                            <table id="GridItemMove" class="table table-bordered table-striped table-responsive">
+                                <thead class="tbl-header grid_backcolor">
+                                    <tr>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:22%;">
+                                            Style
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:8%;">
+                                            Color
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:8%;">
+                                            Size
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:8%;">
+                                            PPK
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:12%">
+                                            LocID
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:8%;">
+                                            AvlCtn
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:12%;">
+                                            AvlQty
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:12%;">
+                                            Rcvd Dt
+                                        </th>
+                                        <th class="grid_header_backcolor Item_Move_tblheader" style="width:10%;">
+                                            PoNum
+                                        </th>
+
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbl-content" style="background-color:rgba(0, 0, 0, 0.12);">
+                                    
+                                        <tr id="GridID_" style="background-color:white;">
+                                           
+                                            <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:21%">
+                                            </td>
+                                            <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:18%">
+                                            </td>
+                                            <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:13%">
+                                            </td>
+                                            <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left; width:20%">
+                                            </td>
+                                            <td class="Item_Move_tblheader" style="font-size:12px; color:black; font-weight:bold; text-align :left;  width:20%">
+                                            </td>
+
+                                            Display None - Region
+                                            <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:12px;color:black;font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:12px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:12px; color:black; font-weight:bold; text-align :left;display:none;">
+                                            </td>
+                                            <td style="font-size:12px; color:black; font-weight:bold; text-align :left;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                            <td style="font-size:10px; color:black; font-weight:bold;display:none;">
+                                            </td>
+                                        </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
         <fieldset style="width:100%">
             @*<legend style="text-align:left;color:orange;margin-bottom:10px;">Total Summary</legend><hr style="margin-bottom:0px;" />*@
 
@@ -141,56 +260,56 @@
             <div class="row">
                 <div class="col-xs-12">
 
-                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
+                    @*<div class="col-xs-3" style="margin-left:-5%; margin-top:1%; display:none;">
+            <span style="font-size: 1.5em;color:#ff5600;">
+                Qty:
+            </span>
+        </div>
+        <div class="col-xs-3" style="margin-left:-13%;margin-top:1%; display:none;">
+            <label class="totalCount" style="text-align:left">
+                @Model.ItemScanIN.ctn
+            </label>
+        </div>*@
+                    <div class="col-xs-1">
                         <span style="font-size: 1.5em;color:#ff5600;">
                             Qty:
                         </span>
                     </div>
-                    <div class="col-xs-3" style="margin-left:-13%;margin-top:1%">
-                        <label class="totalCount" style="text-align:left">
-                            @Model.ItemScanIN.ctn
-                        </label>
-                    </div>
-                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
-                        <span style="font-size: 1.5em;color:#ff5600;">
-                            Total Ctns:
-                        </span>
-                    </div>
-                    <div class="col-xs-3" style="margin-left:-10%;margin-top:1%">
+                    <div class="col-xs-2" style="margin-top:-1%">
                         <label class="totalCount" style="text-align:left">
                             @Model.ItemScanIN.TotalQty
                         </label>
                     </div>
-                    
 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-
-                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
+                    <div class="col-xs-1" style=" margin-top:1%">
                         <span style="font-size: 1.5em;color:#ff5600;">
-                            Scan In Count:
+                            Scanned:
                         </span>
                     </div>
-                    <div class="col-xs-3" style="margin-left:-10%;margin-top:1%">
+                    <div class="col-xs-2" style="margin-top:-1%; margin-left:23px;">
                         <label class="totalCount" style="text-align:left">
                             @Model.ListItemScanIN.Count
                         </label>
                     </div>
-                    <div class="col-xs-3" style="margin-left:-5%; margin-top:1%">
+                    <div class="col-xs-1" style=" margin-top:1%">
                         <span style="font-size: 1.5em;color:#ff5600;">
-                            Scan In Remaining:
+                            Remaining:
                         </span>
                     </div>
-                    <div class="col-xs-3" style="margin-left:-2%;margin-top:1%">
+                    <div class="col-xs-2" style="margin-top: -1%; margin-left: 37px;">
                         <label class="totalCount" style="text-align:left">
                             @Model.ItemScanIN.balanceScan
                         </label>
                     </div>
-
                 </div>
             </div>
+            @*<div class="row">
+                <div class="col-xs-12">
+
+                   
+
+                </div>
+            </div>*@
         </fieldset>
 
         <br />
@@ -474,6 +593,11 @@
         var ctn = $("#ItemScanIN_ctn").val();
         var itm_name = $("#ItemScanIN_itm_name").val();
         var data_itm_serial_num_exist = $("#itm_serial_num_exist").val();
+        if (itm_serial_num.includes(' ')) {
+            while (itm_serial_num.includes(' ')) {
+                itm_serial_num = itm_serial_num.replace(" ", "");
+            }
+        }
         //alert('ibdocid:'+ibdocid);
         //alert('Itm_Code:' + Itm_Code);
         //alert('itm_color:' + itm_color);
@@ -562,11 +686,75 @@
                     });
 
                 }
-                else {
+                else if (e == false) {
                     sweetAlert("", "Scan Details are already Exist Please correct it", "");
                     $("#itm_serial_num").val('');
                     $("#itm_serial_num").focus();
                     $("#ajaxLoadingScanSerialDetails").hide();
+                }
+                else {
+                    // debugger;
+                    //alert(e);
+                    //alert(e.length);
+                    var listOfVal = '';
+                    for (var i = 0; i < e.length; i++) {
+                        listOfVal += e[i] + ',';
+                        if (itm_serial_num_Addedd.includes(e[i] + ";"))
+                            itm_serial_num_Addedd = itm_serial_num_Addedd.replace(e[i] + ";", "");
+                        else if (itm_serial_num_Addedd.includes(e[i] + ","))
+                            itm_serial_num_Addedd = itm_serial_num_Addedd.replace(e[i] + ",", "");
+                        else
+                            itm_serial_num_Addedd = itm_serial_num_Addedd.replace(e[i], "");
+                    }
+
+                    sweetAlert("", "Items: " + listOfVal + "Scan Details are already Exist Please correct it", "");
+                    $("#itm_serial_num").val('');
+                    $("#itm_serial_num").focus();
+                    $("#ajaxLoadingScanSerialDetails").hide();
+
+                    var TeamDetailPostBackURL = '/InBoundScanIn/LoadScanSerialDetails';
+                    var cmp_id = $("#cmp_id").val();
+                    var $buttonClicked = $(this);
+                    var $buttonClicked = $(this);
+                    var id = $("#ibdocid").val();
+                    var id = $("#ItemScanIN_ib_doc_id").val();
+
+                    var ibdocid = $("#ItemScanIN_ib_doc_id").val();
+                    var Itm_Code = $("#Itm_Code").val();
+                    var itm_num = $("#itm_num").val();
+                    var itm_color = $("#itm_color").val();
+                    var itm_size = $("#itm_size").val();
+                    var itm_serial_num = $("#itm_serial_num").val();
+                    var TotalQty = $("#ItemScanIN_TotalQty").val();
+                    var ppk = $("#ItemScanIN_ppk").val();
+                    var ctn = $("#ItemScanIN_ctn").val();
+                    var itm_name = $("#ItemScanIN_itm_name").val();
+                    var options = { "backdrop": "static", keyboard: true };
+                    $("#ajaxLoading").show();
+                    $.ajax({
+                        type: "GET",
+                        url: TeamDetailPostBackURL,
+                        contentType: "application/json; charset=utf-8",
+                        data: { "Id": ibdocid, "cmp_id": cmp_id, "Itm_Code": Itm_Code, "Style": itm_num, "Color": itm_color, "Size": itm_size, "itm_name": itm_name, "ppk": ppk, "ctn": ctn, "TotalQty": TotalQty },
+                        datatype: "json",
+                        success: function (data) {
+                            $("#ajaxLoading").hide();
+                            $('#SerialContent').html(data);
+                            $('#SerialAdd').modal(options);
+                            $('#SerialAdd').modal('show');
+                            //$('#myModalContent').html(data);
+                            //$('#myModal').modal(options);
+                            //$('#myModal').modal('show');
+                            $("#itm_serial_num").focus();
+                            if (itm_serial_num_Addedd.length > 0)
+                                $("#LegendInformation").html(itm_serial_num_Addedd + " Serial Code Added ");
+                        },
+                        error: function () {
+                            $("#ajaxLoading").hide();         //CR_3PL_MVC_IB_2018_0228_002 Added By Meera 28-02-2018
+                            swal("Dynamic content load failed.");
+                        }
+                    });
+
                 }
             },
 
